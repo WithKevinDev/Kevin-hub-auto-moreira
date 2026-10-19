@@ -611,18 +611,6 @@
       vertical-align: middle;
     }
 
-    .hint {
-      font-size: 0.7rem;
-      text-align: center;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-    }
-
-    .hint .key {
-      color: #ff6b6b;
-      font-weight: 600;
-    }
-
     footer {
       margin-top: 4rem;
       text-align: center;
@@ -784,7 +772,6 @@
         </div>
         <div class="output-box" id="scriptOutput">Fill in the form and press GENERATE SCRIPT to build your Kevin Hub loader.</div>
         <button class="generate-btn" id="generateBtn">Generate Script</button>
-        <p class="hint">Real link generated on every click</p>
       </div>
     </div>
 
@@ -807,7 +794,80 @@
     (function () {
       const PASTEFY_API_TOKEN = 'BIqBt1wWgJvXEG2er4A3UD6rxGZnXCllMJV5qvRO0hddGrgqbhluCHf0dhst';
 
-      const brainrotsList = ["Garama and Madundung","Capitano Moby","Burguro And Fryuro","Ketchuru and Musturu","Lavadorito Spinito","Ketupat Kepat","Tictac Sahur","Tang Tang Keletang","Money Money Puggy","Nuclearo Dinossauro","Graipuss Medussi","Cerberus","Dragon Cannelloni","Agarrini la Palini","Fragola La La La","Los Hotspotsitos","Los Bros","Tralaledon","Los Puggies","Los Primos","Los Tacoritas","Los Spaghettis","Spooky and Pumpky","Fragrama and Chocrama","La Casa Boo","Ketupat Bros","Cooki and Milki","Popcuru and Fizzuru","La Supreme Combinasion","Dragon Gingerini","Headless Horseman","Hydra Dragon Cannelloni","Celularcini Viciosini","La Grande Combinasion","Los Trios","La Sahur Combinasion","Bacuru and Egguru","Eviledon","Orcaledon","Money Money Reindeer","Los Jolly Combinasionas","Jolly Jolly Sahur","Chicleteira Noelteira","Bisonte Giuppitere","Jackorilla","Reindeer Tralala","Pumpkini Spyderini","Frankentteo","Santteo","Telemorte","Spaghetti Tualetti","La Secret Combinasion","La Food Combinasion","Los Spooky Combinasionas","Karkerkar Kurkur","La Ginger Sekolah","Rosey and Teddy","Los Sekolahs","Reinito Sleighito","Swaggy Bros","La Taco Combinasion","Chipso and Queso","La Spooky Grande","Tuff Toucan","Chillin Chili","Gobblino Uniciclino","Strawberry Elephant","La Extinct Grande","Tacorita Bicicleta","Quesadillo Vampiro","Perrito Burrito","La Vacca Saturno Saturnita","Karker Sahur","Bunito Bunito Spinito","Pirulitoita Bicicleteira","Bunnyman","Brunito Marsito","Guest 666","Mariachi Corazoni","Swag Soda","Extinct Matteo","Los Quesadillas","Spinny Hammy","Meowl","Skibidi Toilet","Nacho Spyder","Griffin","W or L","La Jolly Grande","La Romantic Grande","Festive 67","Los Tralaleritos","Las Tralaleritas","GOAT","Love Love Bear","Ginger Gerat","Mieteteira Bicicleteira","Trenostruzzo Turbo 4000","La Karkerkar Combinasion","La Vacca Prese Presente","Rocco Disco","1x1x1x1","25","67","Abyssaloco","Antonio","Aquarino","Arcadopus","Arcadragon","Bananito","Baskito","Bearito Cabinito","Berryno","Blackhole Goat","Boatito Auratito","Bombardiro Vaccariro","Boppin Bunny","Buho de Volto","Bunny Bunny Bunny Sahur","Bunny and Eggy","Buntteo","Burrito Bandito","Camera Ramena","Capitano Gullini","Cash or Card","Caylusaurus","Celestial Pegasus","Chachechi","Chicleteira Bicicleteira","Chicleteira Cupideira","Chicleteira Surfeiteira","Chicleteirina Bicicleteirina","Chill Puppy","Chimnino","Churrito Bunnito","Cigno Fulgoro","Cloverat Clapat","Coco and Mango","Craburger","Cuadramat and Pakrahmatmamat","Cupid Cupid Sahur","Cupid Hotspot","DJ Panda","Digi Narwhal","Donkeyturbo Express","Dragon Aquanini","Dug dug dug","Duggy Bros","Dul Dul Dul","Easter Easter Easter Sahur","Eid Eid Eid Sahur","Elefanto Frigo","Esok Sekolah","Extinct Tralalero","Fishboard","Fishino Clownino","Flancito","Flipa Sandala","Fortunu and Cashuru","Foxini Lanternini","Frullato Framingo","Futbolini Skatini","Gelato Lumacho","Giftini Spyderini","Girafini Raftini","Glaciator","Globa Steppa","Gold Egg","Gold Elf","Gold Gold Gold","Granny","Guerriro Digitale","Gym Bros","Ho Ho Ho Sahur","Hopilikalika Hopilikalako","Horegini Boom","Hydra Bunny","Jelly Moby","Job Job Job Sahur","John Doe","Kalika Bros","Kraken","La Anniversary Grande","La Cucaracha","La Easter Grande","La Lucky Grande","La Summer Grande","La Vacca Jacko Linterino","La Vacca Lepre Lepreino","Las Sis","Las Vaquitas Saturnitas","List List List Sahur","Los 25","Los 67","Los Amigos","Los Bunitos","Los Burritos","Los Candies","Los Chicleteiras","Los Chillis","Los Combinasionas","Los Cucarachas","Los Cupids","Los Fruits","Los Hackers","Los Jobcitos","Los Karkeritos","Los Mariachis","Los Matteos","Los Mi Gatitos","Los Mobilis","Los Nooo My Hotspotsitos","Los Planitos","Los Spyderinis","Los Sweethearts","Los Tortus","Love Love Love Sahur","Lovin Rose","Luck Luck Luck Sahur","Lucky Block","Mi Gatito","Money Money Bros","Naughty Naughty","Noo my Candy","Noo my Eggs","Noo my Gold","Noo my Heart","Noo my Present","Noo my examine","Nooo My Hotspot","Octoball","Ombrello Topolino","Pancake and Syrup","Paradiso Axolottino","Please my Present","Pot Hotspot","Pot Pumpkin","Quackini Snackini","Quesadilla Crocodila","Rang Ring Bus","Rico Dinero","Rocketini Frostini","Rosetti Tualetti","Rubrikiko","Sammyni Cakini","Sammyni Fattini","Sammyni Spyderini","Sand Sand Sand","Santa Hotspot","Serafinna Medusella","Signore Carapace","Snailo Clovero","Steakini Fattini","Strawberrita","Sushi Inu","Tacorillo Crocodillo","Tirilikalika Tirilikalako","To To To Sahur","Torrtuginni Dragonfrutini","Trickolino","Triplito Tralaleritos","Ventoliero Pavonero","Venuspino","Vulturino Skeletono","Yess my examine","Zombie Tralala","Esok Goala","Ref Ref Ref Sahur","Hippo Golazo","Bufalino Boomberino","Capitano Americano","Var Var Var","Los Tictacs","Los Tangcitos","Los Admins","Moby Bros","Grabatron","Rubiko and Kubiko","Cangurato Gelato","Noodle Noodle Poodle","Toro Españolo","Chicleteira Champeona","Examen Bros","Pizza and Ranch","Los Secret Combinasionas","Bumbatron","Yetimatic","S'more Serat","Queen Bee","Scorpino Coasterino","Honey Honey Bear","Pogo Pogo Penguin","Conetto Morsetto","La Breakfast Combinasion","La Fuse Machine","Candini Fluffini","Polaroidini","Noo my Resume","Peschito Machito","4th Bros","Los Cornis","Gelatina Volatina","Los Sigmas","Yess my Resume","Nachorilla","Sammyni Truckini","Tacoturbo Tacorito","Burrito Bat","Pop Pop Petalini","Rosatops Triceratino","Motorino Bumbino","Syrup Samurai","Orchidox","Los Dragons","La Craft Machine","Gold and Diamond","Chicli Chicla","Panda Popanda","Deputy Leopard","John Pork","Zebrino Pianino","Ski Ski Skunki","Sir Mangus","Sammyni Spookyni","Rockarino Rockara","Capibaro Celestino","Draculino","Fangaro Lupino","Gattino Hydrantino","Gub","Honey Honey Narwhal","Hydra Serpent","Lavamanta","Lionello Casarello","Los Treaters","Marino Submarino","Oni Oni Panda","Pelican Pachetto","Phoenix","Pin Pin Pengu","Plant Bros","Puffino Builderino","Qamar Camelamp","Ranito Pepito","Rexino Ramino","Dragon Skeletonini","Cobra Gelato","Flying Dutchman","Slushki Huski","Boo Boo Rocket","Bat-in-the-Box","Bananito Skelito","Zombie Bowl","Grim Cheese"];
+      const brainrotsList = [
+        "Polaroidini", "Signore Carapace", "Orchidox", "Kalika Bros", "Elefanto Frigo",
+        "Arcadragon", "Dragon Gingerini", "Love Love Bear", "Griffin", "Antonio",
+        "Dragon Aquanini", "Fishino Clownino", "Kraken", "Digi Narwhal", "Moby Bros",
+        "La Supreme Combinasion", "Tirilikalika Tirilikalako", "Hydra Bunny", "Ginger Gerat",
+        "Jelly Moby", "Bunny and Eggy", "Los Secret Combinasionas", "Hydra Dragon Cannelloni",
+        "Sammyni Cakini", "Pancake and Syrup", "Dragon Cannelloni", "Frankentteo", "Grabatron",
+        "Noo my examine", "Ketupat Bros", "Duggy Bros", "La Casa Boo", "Bumbatron",
+        "Dug Dug Dug", "Foxini Lanternini", "Jackorilla", "Pot Pumpkin", "Rosey and Teddy",
+        "Rubrikiko", "Los Sekolahs", "Rico Dinero", "Capitano Americano", "Santteo",
+        "Sammyni Truckini", "Fortunu and Cashuru", "Los Hackers", "Los Chillis",
+        "Rubiko and Kubiko", "Los Admins", "Los Amigos", "Noo my Present", "Extinct Matteo",
+        "Reinito Sleighito", "Spooky and Pumpky", "Trickolino", "Examen Bros", "Guest 666",
+        "Cerberus", "Celestial Pegasus", "La Food Combinasion", "Ho Ho Ho Sahur",
+        "Reindeer Tralala", "Bunito Bunito Spinito", "Noo my Candy", "Gym Bros",
+        "Quackini Snackini", "Cooki and Milki", "Hopilikalika Hopilikalako",
+        "Fragrama and Chocrama", "Popcuru and Fizzuru", "Capitano Moby", "La Fuse Machine",
+        "La Vacca Jacko Linterino", "Pop Pop Petalini", "Celularcini Viciosini", "Tralaledon",
+        "S'more Serat", "Burguro and Fryuro", "Boppin Bunny", "Sammyni Fattini", "Globa Steppa",
+        "Yetimatic", "Los Cucarachas", "Los Tacoritas", "Pizza and Ranch", "Cloverat Clapat",
+        "Festive 67", "Burrito Bat", "GOAT", "La Karkerkar Combinasion", "Los Jolly Combinasionas",
+        "Money Money Bros", "Nooo My Hotspot", "Rang Ring Bus", "Ref Ref Ref Sahur",
+        "Triplito Tralaleritos", "Yess my examine", "Jolly Jolly Sahur", "Karker Sahur",
+        "Los Mi Gatitos", "Los Planitos", "Quesadillo Vampiro", "Vulturino Skeletono",
+        "Buho de Volto", "Cash or Card", "Los Quesadillas", "Los Sweethearts", "Pogo Pogo Penguin",
+        "Steakini Fattini", "Los Cornis", "Los Hotspotsitos", "Chillin Chili", "John Doe",
+        "Telemorte", "Agarrini La Palini", "Caylusaurus", "Cuadramat and Pakrahmatmamat",
+        "La Summer Grande", "La Taco Combinasion", "La Easter Grande", "La Secret Combinasion",
+        "Candini Fluffini", "Churrito Bunnito", "Fragola La La La", "Scorpino Coasterino",
+        "Abyssaloco", "Brunito Marsito", "Chicleteira Champeona", "Nachorilla", "25 Secret",
+        "Los Primos", "La Ginger Sekolah", "Los Jobcitos", "Los Spyderinis", "Puffino Builderino",
+        "Queen Bee", "Gattino Hydrantino", "Los Cupids", "Snailo Clovero", "Lovin Rose",
+        "Orcaledon", "Garama and Madundung", "Cangurato Gelato", "Coco and Mango",
+        "Gold Gold Gold", "Los Spaghettis", "Chipso and Queso", "1x1x1x1", "67", "Aquarino",
+        "Arcadopus", "Bacuru and Egguru", "Bananito", "Baskito", "Berryno", "Bisonte Giuppitere",
+        "Blackhole Goat", "Boatito Auratito", "Bombardiro Vaccariro", "Bufalino Boomberino",
+        "Bunny Bunny Bunny Sahur", "Bunnyman", "Buntteo", "Burrito Bandito", "Camera Ramena",
+        "Capitano Gullini", "Chachechi", "Chicleteira Bicicleteira", "Chicleteira Cupideira",
+        "Chicleteira Noelteira", "Chicleteira Surfeiteira", "Chicleteirina Bicicleteirina",
+        "Chill Puppy", "Chimnino", "Cigno Fulgoro", "Cupid Cupid Sahur", "Cupid Hotspot",
+        "DJ Panda", "Donkeyturbo Express", "Dul Dul Dul", "Easter Easter Easter Sahur",
+        "Eid Eid Eid Sahur", "Esok Goala", "Esok Sekolah", "Eviledon", "Extinct Tralalero",
+        "Fishboard", "Flancito", "Flipa Sandala", "Futbolini Skatini", "Gelato Lumacho",
+        "Giftini Spyderini", "Glaciator", "Gobblino Uniciclino", "Graipuss Medussi", "Granny",
+        "Gub", "Guerriro Digitale", "Hippo Golazo", "Honey Honey Bear", "Honey Honey Narwhal",
+        "Horegini Boom", "Job Job Job Sahur", "Karkerkar Kurkur", "Ketchuru and Musturu",
+        "Ketupat Kepat", "La Anniversary Grande", "La Cucaracha", "La Extinct Grande",
+        "La Grande Combinasion", "La Jolly Grande", "La Lucky Grande", "La Romantic Grande",
+        "La Sahur Combinasion", "La Spooky Grande", "La Vacca Lepre Lepreino",
+        "La Vacca Prese Presente", "La Vacca Saturno Saturnita", "Las Sis", "Las Tralaleritas",
+        "Las Vaquitas Saturnitas", "Lavadorito Spinito", "List List List Sahur", "Los 25",
+        "Los 67", "Los Bros", "Los Bunitos", "Los Burritos", "Los Candies", "Los Chicleteiras",
+        "Los Combinasionas", "Los Karkeritos", "Los Mariachis", "Los Matteos", "Los Mobilis",
+        "Los Nooo My Hotspotsitos", "Los Puggies", "Los Sigmas", "Los Spooky Combinasionas",
+        "Los Tangcitos", "Los Tictacs", "Los Tortus", "Los Tralaleritos", "Los Trios",
+        "Love Love Love Sahur", "Luck Luck Luck Sahur", "Mariachi Corazoni", "Mi Gatito",
+        "Mieteteira Bicicleteira", "Money Money Puggy", "Money Money Reindeer", "Motorino Bumbino",
+        "Nacho Spyder", "Naughty Naughty", "Noo my Eggs", "Noo my Gold", "Noo my Heart",
+        "Noodle Noodle Poodle", "Nuclearo Dinossauro", "Ombrello Topolino",
+        "Paradiso Axolottino", "Perrito Burrito", "Peschito Machito", "Pirulitoita Bicicleteira",
+        "Please my Present", "Pot Hotspot", "Pumpkini Spyderini", "Quesadilla Crocodila",
+        "Rocco Disco", "Rosatops Triceratino", "Rosetti Tualetti", "Sammyni Spyderini",
+        "Santa Hotspot", "Secret Lucky Block", "Serafinna Medusella", "Spaghetti Tualetti",
+        "Spinny Hammy", "Strawberrita", "Swag Soda", "Swaggy Bros", "Syrup Samurai",
+        "Tacorillo Crocodillo", "Tacorita Bicicleta", "Tacoturbo Tacorito",
+        "Tang Tang Keletang", "Tictac Sahur", "To to to Sahur", "Toro Español",
+        "Torrtuginni Dragonfrutini", "Trenostruzzo Turbo 4000", "Tuff Toucan",
+        "Ventoliero Pavonero", "W or L", "Zombie Tralala", "Aura Farm Boat",
+        "Burguro And Fryuro (Outdated)", "Chillin Clover", "Chimpanzini Spiderini",
+        "Coffin Tung Tung Tung Sahur", "Cornetto Morsetto", "Divine Rosey and Teddy",
+        "Gold Elf", "HO Hokka Horloge", "Hopilikalika Hopilikalako Egg", "Ice Dragon",
+        "Quackini Snackini Egg", "Rainbow and Gold", "Sammyni Partyni", "Tung Tung Tung Sahur",
+        "Wheelchair Granny"
+      ];
 
       const skinsList = ["Rose","Gingerbread","Halloween","Christmas","Bunny Basket","Summer","Pot of Gold","Taco","Octo","Valentines","Easter","Lucky","Aquatic","Tralalero"];
 
