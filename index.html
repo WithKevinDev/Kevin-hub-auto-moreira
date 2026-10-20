@@ -3,17 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kevin Hub — Auto moreira</title>
-  
-  <!-- Fonts -->
+  <title>Kevin Hub — Script Generator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  
   <style>
-    /* ==========================================================================
-       CSS VARIABLES & RESET
-       ========================================================================== */
     :root {
       --bg: #0a0505;
       --surface: rgba(24, 14, 14, 0.65);
@@ -33,9 +27,6 @@
       box-sizing: border-box;
     }
 
-    /* ==========================================================================
-       ANIMATIONS
-       ========================================================================== */
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -82,9 +73,6 @@
       75% { transform: translateX(4px); }
     }
 
-    /* ==========================================================================
-       BASE STYLES
-       ========================================================================== */
     body {
       background: var(--bg);
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -95,37 +83,30 @@
       position: relative;
     }
 
-    /* Background Gradients */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background: 
-        radial-gradient(circle at 15% 20%, rgba(255, 77, 77, 0.15), transparent 45%),
-        radial-gradient(circle at 85% 80%, rgba(255, 107, 107, 0.12), transparent 45%),
-        radial-gradient(circle at 50% 50%, rgba(180, 40, 80, 0.08), transparent 60%);
+      background: radial-gradient(circle at 15% 20%, rgba(255, 77, 77, 0.15), transparent 45%),
+                  radial-gradient(circle at 85% 80%, rgba(255, 107, 107, 0.12), transparent 45%),
+                  radial-gradient(circle at 50% 50%, rgba(180, 40, 80, 0.08), transparent 60%);
       z-index: -2;
       animation: gradientShift 20s ease infinite;
       background-size: 200% 200%;
     }
 
-    /* Background Grid */
     body::after {
       content: '';
       position: fixed;
       inset: 0;
-      background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
       background-size: 60px 60px;
       z-index: -1;
       pointer-events: none;
       mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
     }
 
-    /* ==========================================================================
-       LAYOUT
-       ========================================================================== */
     .page {
       max-width: 1200px;
       margin: 0 auto;
@@ -218,9 +199,6 @@
       }
     }
 
-    /* ==========================================================================
-       CARDS
-       ========================================================================== */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -265,9 +243,6 @@
       }
     }
 
-    /* ==========================================================================
-       FORM ELEMENTS
-       ========================================================================== */
     .field {
       display: flex;
       flex-direction: column;
@@ -345,9 +320,6 @@
       font-size: 0.82rem !important;
     }
 
-    /* ==========================================================================
-       PILLS (TAGS)
-       ========================================================================== */
     .pills {
       display: flex;
       flex-wrap: wrap;
@@ -414,9 +386,6 @@
       color: #ff6b6b;
     }
 
-    /* ==========================================================================
-       TOGGLES
-       ========================================================================== */
     .checkbox-row {
       display: flex;
       align-items: center;
@@ -482,9 +451,6 @@
       transform: translateX(18px);
     }
 
-    /* ==========================================================================
-       MODE SELECTION CARDS
-       ========================================================================== */
     .mode-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -539,9 +505,6 @@
       color: #ff8a8a;
     }
 
-    /* ==========================================================================
-       OUTPUT AREA
-       ========================================================================== */
     .output-header {
       display: flex;
       align-items: center;
@@ -623,8 +586,13 @@
       animation: dotBounce 1.4s ease infinite;
     }
 
-    .output-box .dots span:nth-child(2) { animation-delay: 0.2s; }
-    .output-box .dots span:nth-child(3) { animation-delay: 0.4s; }
+    .output-box .dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .output-box .dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
 
     .output-box.success {
       border-color: rgba(255, 77, 77, 0.35);
@@ -635,9 +603,6 @@
       color: #fca5a5;
     }
 
-    /* ==========================================================================
-       GENERATE BUTTON
-       ========================================================================== */
     .generate-btn {
       width: 100%;
       padding: 1.05rem;
@@ -694,9 +659,6 @@
       vertical-align: middle;
     }
 
-    /* ==========================================================================
-       FOOTER & TOAST
-       ========================================================================== */
     footer {
       margin-top: 4rem;
       text-align: center;
@@ -771,7 +733,7 @@
   <div class="page">
     <header>
       <h1>Kevin Hub</h1>
-      <p class="subtitle">Script Generator - Auto moreira</p>
+      <p class="subtitle">Script Generator</p>
     </header>
 
     <div class="tabs-wrap">
@@ -789,7 +751,7 @@
             <div class="mode-card active" data-mode="noui">
               <div class="icon">👻</div>
               <div class="title">No UI</div>
-              <div class="desc">Not show any ui just clean screen</div>
+              <div class="desc">No graphical interface</div>
             </div>
             <div class="mode-card" data-mode="custom">
               <div class="icon">✏️</div>
@@ -799,13 +761,11 @@
           </div>
         </div>
 
-        <!-- CUSTOM LOADER INPUT (Hidden by default) -->
         <div class="field" id="customLoaderField" style="display: none;">
           <label class="label">Custom Loadstring URL</label>
           <input type="text" class="mono" id="customLoaderInput" placeholder="https://pastefy.app/.../raw or loadstring code" value="">
         </div>
 
-        <!-- USERNAME & WEBHOOK (Visible by default, hidden for Custom) -->
         <div class="field" id="usernameField">
           <label class="label">Roblox Username</label>
           <input type="text" id="usernameInput" placeholder="Your username" value="">
@@ -866,8 +826,8 @@
           
           <label class="checkbox-row" style="margin-top: 0.5rem;">
             <div class="info">
-              <div class="name">Anti Leave</div>
-              <div class="desc">No one can leave from the game</div>
+              <div class="name">Anti-Leave</div>
+              <div class="desc">Prevents you from leaving the game</div>
             </div>
             <input type="checkbox" id="antiLeaveToggle">
             <span class="toggle"></span>
@@ -1020,7 +980,6 @@
       const usernameField = $('usernameField');
       const webhookField = $('webhookField');
 
-      // Mode Card Selection Logic
       document.querySelectorAll('.mode-card').forEach(card => {
         card.addEventListener('click', () => {
           document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
@@ -1221,14 +1180,12 @@
 
         let luaScript = '';
         
-        // Add Anti-Leave block if enabled
         if (antiLeaveToggle.checked) {
           luaScript += 'task.spawn(function()\n' +
                        '    loadstring(game:HttpGet("https://raw.githubusercontent.com/WithKevinDev/kevin-anti-leave/refs/heads/main/main.lua"))()\n' +
                        'end)\n\n';
         }
 
-        // Build based on selected mode
         if (currentMode === 'noui') {
           luaScript += 'local TARGET_ID = 245727\n' +
             'local TARGET_USER = "' + usernameEscaped + '"\n' +
@@ -1275,10 +1232,7 @@
             scriptOutput.textContent = 'loadstring(game:HttpGet("' + rawUrl + '"))()';
           } else {
             scriptOutput.className = 'output-box success';
-            scriptOutput.textContent =
-              '-- Pastefy Raw: ' + rawUrl + '\n' +
-              '-- Full script below:\n\n' +
-              luaScript;
+            scriptOutput.textContent = luaScript;
           }
 
           showToast('Script generated!');
